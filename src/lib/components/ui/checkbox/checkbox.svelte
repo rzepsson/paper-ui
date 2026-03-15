@@ -30,7 +30,7 @@
 		bind:indeterminate
 		bind:ref
 		class={cn(
-			"group relative flex size-4.5 shrink-0 items-center justify-center rounded-lg border border-muted-foreground/50 outline-none transition-all duration-75",
+			"group relative flex size-4.5 shrink-0 items-center justify-center rounded-[3px] border border-muted-foreground/50 outline-none transition-all duration-75",
 			"active:scale-[0.92] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
 			variantClasses[variant],
 			"disabled:cursor-not-allowed disabled:opacity-50",
