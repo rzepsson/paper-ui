@@ -1,9 +1,10 @@
 <script lang="ts">
   import ThemeSwitcher from "$lib/components/theme-switcher.svelte";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
+  import { Button } from "$lib/components/ui/button";
   import { 
     Image as ImageIcon, Frame, MonitorSmartphone, Tablet,
-    User, Settings, LogOut, Keyboard, Bell, Sparkles, Command, CheckSquare,
+    Download, Plus, Trash, ExternalLink,
     ArrowUpDown
   } from "lucide-svelte";
   
@@ -112,5 +113,56 @@
       </DropdownMenu.Group>
     </DropdownMenu.Content>
   </DropdownMenu.Root>
+
+</div>
+
+<div class="flex min-h-screen flex-col items-center justify-center gap-12 bg-background p-12 text-foreground">
+	
+	<div class="flex flex-col gap-4 text-center">
+		<h2 class="font-sans text-lg font-semibold">Warianty przycisków</h2>
+		<div class="flex flex-wrap items-center justify-center gap-4">
+			<Button variant="default">Primary</Button>
+			<Button variant="secondary">Secondary</Button>
+			<Button variant="outline">Outline</Button>
+			<Button variant="ghost">Ghost</Button>
+			<Button variant="destructive">Destructive</Button>
+			<Button variant="link">Link text</Button>
+		</div>
+	</div>
+
+	<div class="flex flex-col gap-4 text-center">
+		<h2 class="font-sans text-lg font-semibold">Rozmiary i ikony</h2>
+		<div class="flex flex-wrap items-center justify-center gap-4">
+			<Button size="sm">Small (32px)</Button>
+			<Button size="default">Default (36px)</Button>
+			<Button size="lg">Large (40px)</Button>
+			
+			<Button>
+				<Download class="mr-2 size-4" />
+				Zapisz
+			</Button>
+
+			<Button variant="outline" size="icon" aria-label="Dodaj">
+				<Plus class="size-4" />
+			</Button>
+		</div>
+	</div>
+
+	<div class="flex flex-col gap-4 text-center">
+		<h2 class="font-sans text-lg font-semibold">API Bits UI (Link & Disabled)</h2>
+		<div class="flex flex-wrap items-center justify-center gap-4">
+			
+			<Button disabled>
+				<Trash class="mr-2 size-4" />
+				Nieaktywny
+			</Button>
+
+			<Button href="https://github.com" target="_blank" variant="secondary">
+				<ExternalLink class="mr-2 size-4" />
+				Otwórz link
+			</Button>
+			
+		</div>
+	</div>
 
 </div>
