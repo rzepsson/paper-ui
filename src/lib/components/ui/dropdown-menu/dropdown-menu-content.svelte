@@ -17,7 +17,7 @@
 	let {
 		class: className = "",
 		side = "bottom",
-		align = "end",
+		align = "start",
 		sideOffset = 6,
 		size = "m",
 		children,
