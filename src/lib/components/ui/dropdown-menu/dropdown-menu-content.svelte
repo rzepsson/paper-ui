@@ -2,24 +2,13 @@
 	import { DropdownMenu as DropdownMenuPrimitive } from "bits-ui";
 	import { cn } from "$lib/utils";
 
-	type MenuSize = "s" | "m" | "l" | "xl";
-	type ContentProps = DropdownMenuPrimitive.ContentProps & {
-		size?: MenuSize;
-	};
-
-	const sizeClassMap: Record<MenuSize, string> = {
-		s: "min-w-44",
-		m: "min-w-56",
-		l: "min-w-64",
-		xl: "min-w-72"
-	};
+	type ContentProps = DropdownMenuPrimitive.ContentProps;
 
 	let {
 		class: className = "",
 		side = "bottom",
 		align = "start",
 		sideOffset = 6,
-		size = "m",
 		children,
 		ref = $bindable(null),
 		...restProps
@@ -34,7 +23,7 @@
 		{sideOffset}
 		class={cn(
 			"dropdown-menu-surface z-50 overflow-hidden rounded-lg border border-border/80 bg-popover p-2 text-popover-foreground shadow-lg outline-none",
-			sizeClassMap[size as MenuSize] ?? sizeClassMap.m,
+			"min-w-56",
 			"max-h-[calc(var(--bits-dropdown-menu-content-available-height)-12px)]",
 			"data-[state=closed]:pointer-events-none",
 			className
