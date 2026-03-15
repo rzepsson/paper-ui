@@ -8,7 +8,7 @@
 		class: className = "",
 		checked = $bindable(false),
 		indeterminate = $bindable(false),
-		variant = "basic",
+		variant = "primary",
 		ref = $bindable(null),
 		children,
 		...restProps
