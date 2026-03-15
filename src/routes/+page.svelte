@@ -60,7 +60,7 @@
               <span>Illustrator for iPad</span>
             </DropdownMenu.Item>
             
-            <DropdownMenu.Item>
+            <DropdownMenu.Item disabled={true}>
               <MonitorSmartphone class="size-5 opacity-80" />
               <span>Illustrator for desktop</span>
             </DropdownMenu.Item>
@@ -98,7 +98,7 @@
         <DropdownMenu.Separator class="mb-2" />
         
         <DropdownMenu.RadioGroup bind:value={sortBy}>
-          <DropdownMenu.RadioItem value="date">
+          <DropdownMenu.RadioItem value="date" disabled={true}>
             Date
           </DropdownMenu.RadioItem>
           <DropdownMenu.RadioItem value="name">
