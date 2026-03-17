@@ -13,13 +13,13 @@
 		children,
 		...restProps
 	}: WithoutChildrenOrChild<CheckboxPrimitive.RootProps> & {
-		variant?: "basic" | "primary";
+		variant?: "default" | "primary";
 		children?: import("svelte").Snippet;
 	} = $props();
 
 	const variantClasses = {
 		primary: "data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:border-primary text-primary-foreground",
-		basic: "data-[state=checked]:bg-foreground data-[state=checked]:border-foreground data-[state=indeterminate]:bg-foreground data-[state=indeterminate]:border-foreground text-background"
+		default: "data-[state=checked]:bg-foreground data-[state=checked]:border-foreground data-[state=indeterminate]:bg-foreground data-[state=indeterminate]:border-foreground text-background"
 	};
 </script>
 

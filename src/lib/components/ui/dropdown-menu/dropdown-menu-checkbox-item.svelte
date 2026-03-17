@@ -8,15 +8,15 @@
 		children,
 		checked = $bindable(false),
 		indeterminate = $bindable(false),
-		variant = "basic",
+		variant = "primary",
 		closeOnSelect = false,
 		ref = $bindable(null),
 		...restProps
-	}: DropdownMenuPrimitive.CheckboxItemProps & { variant?: "basic" | "primary" } = $props();
+	}: DropdownMenuPrimitive.CheckboxItemProps & { variant?: "default" | "primary" } = $props();
 
 	const controlVariants = {
 		primary: "group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary text-primary-foreground",
-		basic: "group-data-[state=checked]:border-foreground group-data-[state=checked]:bg-foreground group-data-[state=indeterminate]:border-foreground group-data-[state=indeterminate]:bg-foreground text-background"
+		default: "group-data-[state=checked]:border-foreground group-data-[state=checked]:bg-foreground group-data-[state=indeterminate]:border-foreground group-data-[state=indeterminate]:bg-foreground text-background"
 	};
 </script>
 

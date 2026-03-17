@@ -288,7 +288,7 @@
         <div class="space-y-6">
           <h3 class="text-sm font-medium text-muted-foreground">Individual States</h3>
           <div class="space-y-4">
-            <Checkbox.Root bind:checked={termsAccepted} variant="basic">
+            <Checkbox.Root bind:checked={termsAccepted} variant="default">
               Accept terms and conditions
             </Checkbox.Root>
             
