@@ -30,7 +30,7 @@
         bind:indeterminate
         bind:ref
         class={cn(
-            "checkbox-transitions group relative flex size-4.5 shrink-0 items-center justify-center rounded border-2 border-input bg-background outline-none",
+            "checkbox-transitions group relative flex size-4.5 shrink-0 items-center justify-center rounded border-2 border-input bg-muted outline-none",
             "active:scale-[0.92] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             variantClasses[variant],
             "disabled:cursor-not-allowed disabled:opacity-50",
