@@ -1,17 +1,17 @@
 <script lang="ts">
-    import { DropdownMenu as DropdownMenuPrimitive } from "bits-ui";
+    import { AlertDialog as AlertDialogPrimitive } from "bits-ui";
     import { cn } from "$lib/utils";
 
     let { 
-        class: className = "", 
+        class: className = "",
+        ref = $bindable(null), 
         children, 
         child,
-        ref = $bindable(null), 
         ...restProps 
-    }: DropdownMenuPrimitive.TriggerProps = $props();
+    }: AlertDialogPrimitive.TriggerProps = $props();
 </script>
 
-<DropdownMenuPrimitive.Trigger 
+<AlertDialogPrimitive.Trigger 
     bind:ref 
     class={cn("outline-none select-none", className)}
     {child} 
@@ -20,4 +20,4 @@
     {#if !child}
         {@render children?.()}
     {/if}
-</DropdownMenuPrimitive.Trigger>
+</AlertDialogPrimitive.Trigger>

@@ -20,7 +20,7 @@
 	class={cn(
 		"group flex flex-1 items-center gap-3 py-4 px-2 font-sans text-sm font-medium transition-all outline-none",
 		"hover:bg-accent/40 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:ring-offset-background",
-		// Wariant quiet: od razu zaokrąglony. Wariant default: zaokrąglony tylko przy focusie z klawiatury
+		"select-none",
 		variant === "quiet" ? "rounded-md" : "rounded-none focus-visible:rounded-md",
 		"disabled:pointer-events-none disabled:opacity-50",
 		className

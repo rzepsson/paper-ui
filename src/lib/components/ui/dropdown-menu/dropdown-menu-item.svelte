@@ -5,6 +5,7 @@
     let {
         class: className = "",
         children,
+        child,
         ref = $bindable(null),
         ...restProps
     }: DropdownMenuPrimitive.ItemProps = $props();
@@ -19,7 +20,10 @@
         "data-disabled:pointer-events-none data-disabled:opacity-45",
         className
     )}
+    {child}
     {...restProps}
 >
-    {@render children?.()}
+    {#if !child}
+        {@render children?.()}
+    {/if}
 </DropdownMenuPrimitive.Item>

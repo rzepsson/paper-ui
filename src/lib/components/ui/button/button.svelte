@@ -25,7 +25,7 @@
 		outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
 		secondary: "bg-secondary text-secondary-foreground border border-border/50 shadow-sm hover:bg-secondary/80",
 		ghost: "hover:bg-accent hover:text-accent-foreground",
-		link: "text-primary underline-offset-4 hover:underline",
+		link: "text-primary hover:text-primary/80",
 	};
 
 	const sizeClasses: Record<ButtonSize, string> = {
@@ -41,9 +41,11 @@
 	class={cn(
 		"inline-flex items-center justify-center whitespace-nowrap font-sans text-sm font-medium",
 		"transition-all active:scale-[0.92] duration-200",
+		"select-none",
 		"disabled:pointer-events-none disabled:opacity-50",
 		focusRingClass,
 		variantClasses[variant],
+		variant === "link" && size !== "icon" && "underline underline-offset-4 decoration-primary hover:decoration-primary/80",
 		sizeClasses[size],
 		className
 	)}

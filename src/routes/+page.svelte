@@ -1,6 +1,7 @@
 <script lang="ts">
   import ThemeSwitcher from "$lib/components/theme-switcher.svelte";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
+  import * as AlertDialog from "$lib/components/ui/alert-dialog";
   import * as Accordion from "$lib/components/ui/accordion";
   import * as Checkbox from "$lib/components/ui/checkbox";
   import { Button } from "$lib/components/ui/button";
@@ -131,7 +132,11 @@
         
         <DropdownMenu.Root>
           <DropdownMenu.Trigger class="w-auto px-4">
-            Publish Options
+            {#snippet child({ props })}
+              <Button {...props} variant="outline">
+                Options
+              </Button>
+            {/snippet}
           </DropdownMenu.Trigger>
 
           <DropdownMenu.Content class="w-72">
@@ -176,7 +181,7 @@
 
               <DropdownMenu.Separator class="my-2" />
 
-              <DropdownMenu.CheckboxItem variant="primary" bind:checked={showFiles}>
+              <DropdownMenu.CheckboxItem bind:checked={showFiles}>
                 Show files
               </DropdownMenu.CheckboxItem>
               <DropdownMenu.CheckboxItem bind:checked={showFolders}>
@@ -188,8 +193,11 @@
 
         <DropdownMenu.Root>
           <DropdownMenu.Trigger class="w-auto px-4">
-            <ArrowUpDown class="mr-2 size-4 opacity-70" />
-            Sort
+            {#snippet child({ props })}
+              <Button {...props} variant="outline">
+                Sort by
+              </Button>
+            {/snippet}
           </DropdownMenu.Trigger>
 
           <DropdownMenu.Content class="w-48">
@@ -204,13 +212,13 @@
               <DropdownMenu.Separator class="mb-2" />
               
               <DropdownMenu.RadioGroup bind:value={sortBy}>
-                <DropdownMenu.RadioItem value="date" disabled={true}>
+                <DropdownMenu.RadioItem value="date" disabled={true} closeOnSelect={false}>
                   Date
                 </DropdownMenu.RadioItem>
-                <DropdownMenu.RadioItem value="name">
+                <DropdownMenu.RadioItem value="name" closeOnSelect={false}>
                   Name
                 </DropdownMenu.RadioItem>
-                <DropdownMenu.RadioItem value="size">
+                <DropdownMenu.RadioItem value="size" closeOnSelect={false}>
                   Size
                 </DropdownMenu.RadioItem>
               </DropdownMenu.RadioGroup>
@@ -218,6 +226,56 @@
           </DropdownMenu.Content>
         </DropdownMenu.Root>
         
+      </div>
+    </section>
+
+    <section class="space-y-6">
+      <div>
+        <h2 class="text-xl font-semibold tracking-tight">Alert Dialog</h2>
+        <p class="text-sm text-muted-foreground">Krytyczne okno modalne przerywające pracę użytkownika.</p>
+      </div>
+      
+      <div class="flex flex-wrap gap-6 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
+        
+        <AlertDialog.Root>
+          <AlertDialog.Trigger>
+            {#snippet child({ props })}
+              <Button {...props}>
+                Alert
+              </Button>
+            {/snippet}
+          </AlertDialog.Trigger>
+          
+          <AlertDialog.Portal>
+            <AlertDialog.Overlay />
+            <AlertDialog.Content>
+              <div class="flex flex-col gap-2">
+                <AlertDialog.Title>Czy na pewno chcesz usunąć projekt?</AlertDialog.Title>
+                <AlertDialog.Description>
+                  Ta akcja jest nieodwracalna. Spowoduje to trwałe usunięcie projektu oraz wszystkich przypisanych do niego plików z naszych serwerów.
+                </AlertDialog.Description>
+              </div>
+              
+              <div class="mt-6 flex flex-col-reverse justify-end gap-3 sm:flex-row">
+                <AlertDialog.Cancel>
+                  {#snippet child({ props })}
+                    <Button {...props} variant="outline" class="w-full sm:w-auto">
+                      Anuluj
+                    </Button>
+                  {/snippet}
+                </AlertDialog.Cancel>
+                <AlertDialog.Action>
+                  {#snippet child({ props })}
+                    <Button {...props} variant="destructive" class="w-full sm:w-auto">
+                      Tak, usuń
+                    </Button>
+                  {/snippet}
+                </AlertDialog.Action>
+              </div>
+            </AlertDialog.Content>
+          </AlertDialog.Portal>
+        </AlertDialog.Root>
+
       </div>
     </section>
 
@@ -288,15 +346,15 @@
         <div class="space-y-6">
           <h3 class="text-sm font-medium text-muted-foreground">Individual States</h3>
           <div class="space-y-4">
-            <Checkbox.Root bind:checked={termsAccepted} variant="default">
+            <Checkbox.Root bind:checked={termsAccepted} variant="basic">
               Accept terms and conditions
             </Checkbox.Root>
             
-            <Checkbox.Root bind:indeterminate={newsletterIndeterminate}>
+            <Checkbox.Root bind:indeterminate={newsletterIndeterminate} variant="basic">
               Enable daily digests
             </Checkbox.Root>
 
-            <Checkbox.Root disabled checked>
+            <Checkbox.Root disabled checked variant="basic">
               Disabled checked state
             </Checkbox.Root>
           </div>

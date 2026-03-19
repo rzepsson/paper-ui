@@ -11,7 +11,6 @@
 		...restProps
 	}: AccordionPrimitive.ItemProps = $props();
 
-	// Odbieramy wariant od rodzica
 	let getVariant = getContext<() => string>("accordionVariant");
 	let variant = $derived(getVariant ? getVariant() : "default");
 </script>
@@ -20,7 +19,7 @@
 	bind:ref
 	{value}
 	class={cn(
-		variant === "default" && "border-b border-border/60", // Dolna linia dla default
+		variant === "default" && "border-b border-border/60",
 		className
 	)}
 	{...restProps}
