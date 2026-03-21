@@ -19,8 +19,8 @@
     } = $props();
 
     const variantClasses = {
-        default: "data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:border-primary text-primary-foreground group-hover/row:border-primary/80",
-        basic: "data-[state=checked]:bg-foreground data-[state=checked]:border-foreground data-[state=indeterminate]:bg-foreground data-[state=indeterminate]:border-foreground text-background group-hover/row:border-foreground/80"
+        default: "data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:border-primary text-primary-foreground group-hover/row:border-foreground/30",
+        basic: "data-[state=checked]:bg-foreground data-[state=checked]:border-foreground data-[state=indeterminate]:bg-foreground data-[state=indeterminate]:border-foreground text-background group-hover/row:border-foreground/30"
     };
 </script>
 

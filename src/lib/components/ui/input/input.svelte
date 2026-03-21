@@ -14,8 +14,8 @@
     } = $props();
 
     const variantClasses = {
-        default: "hover:border-primary/80 focus:border-primary",
-        basic: "hover:border-foreground/80 focus:border-foreground"
+        default: "hover:border-foreground/30 focus:border-primary",
+        basic: "hover:border-foreground/30 focus:border-foreground"
     };
 </script>
 
