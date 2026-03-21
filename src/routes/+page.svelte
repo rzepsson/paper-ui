@@ -5,6 +5,8 @@
   import * as Accordion from "$lib/components/ui/accordion";
   import * as Checkbox from "$lib/components/ui/checkbox";
   import { Button } from "$lib/components/ui/button";
+  import { Label } from "$lib/components/ui/label";
+  import { Input } from "$lib/components/ui/input";
   
   import { 
     Image as ImageIcon, Frame, MonitorSmartphone, Tablet,
@@ -329,6 +331,42 @@
               <ExternalLink class="mr-2 size-4" />
               Open link
             </Button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="space-y-6">
+      <div>
+        <h2 class="text-xl font-semibold tracking-tight">Forms & Typography</h2>
+        <p class="text-sm text-muted-foreground">Labels, inputs and state management.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
+        
+        <div class="space-y-3">
+          <h3 class="text-sm font-medium text-muted-foreground">Standard Field</h3>
+          <div class="flex max-w-sm flex-col-reverse gap-2">
+            <Input 
+              id="mock-email" 
+              type="email" 
+              placeholder="name@example.com" 
+            />
+            <Label for="mock-email">Email address</Label>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="text-sm font-medium text-muted-foreground">Disabled Field Magic</h3>
+          <div class="flex max-w-sm flex-col-reverse gap-2">
+            <Input 
+              id="mock-username" 
+              type="text" 
+              disabled 
+              placeholder="This field is disabled" 
+            />
+            <Label for="mock-username">Username (disabled)</Label>
           </div>
         </div>
 

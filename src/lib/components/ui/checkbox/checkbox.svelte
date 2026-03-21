@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { Checkbox as CheckboxPrimitive, Label, useId, type WithoutChildrenOrChild } from "bits-ui";
+    import { Checkbox as CheckboxPrimitive, useId, type WithoutChildrenOrChild } from "bits-ui";
     import { Check, Minus } from "lucide-svelte";
-    import { cn } from "$lib/utils";
+    import { cn, focusRingClass } from "$lib/utils";
+    import { Label } from "$lib/components/ui/label";
 
     let {
         id = useId(),
@@ -18,8 +19,8 @@
     } = $props();
 
     const variantClasses = {
-        default: "data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:border-primary text-primary-foreground group-hover/row:border-foreground/40",
-        basic: "data-[state=checked]:bg-foreground data-[state=checked]:border-foreground data-[state=indeterminate]:bg-foreground data-[state=indeterminate]:border-foreground text-background group-hover/row:border-foreground/40"
+        default: "data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:border-primary text-primary-foreground group-hover/row:border-primary/80",
+        basic: "data-[state=checked]:bg-foreground data-[state=checked]:border-foreground data-[state=indeterminate]:bg-foreground data-[state=indeterminate]:border-foreground text-background group-hover/row:border-foreground/80"
     };
 </script>
 
@@ -31,7 +32,8 @@
         bind:ref
         class={cn(
             "checkbox-transitions group relative flex size-4.5 shrink-0 items-center justify-center rounded border-2 border-input bg-muted outline-none",
-            "active:scale-[0.92] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            "active:scale-[0.92]",
+            focusRingClass,
             variantClasses[variant],
             "disabled:cursor-not-allowed disabled:opacity-50",
             className
@@ -45,23 +47,19 @@
     </CheckboxPrimitive.Root>
 
     {#if children}
-        <Label.Root 
+        <Label 
             for={id} 
-            class={cn(
-                "select-none font-sans text-sm font-medium leading-none transition-colors duration-200",
-                "text-foreground/90 group-hover/row:text-foreground",
-                "peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            )}
+            class="transition-colors duration-200 text-foreground/90 group-hover/row:text-foreground cursor-pointer"
         >
             {@render children()}
-        </Label.Root>
+        </Label>
     {/if}
 </div>
 
 <style>
     :global(.checkbox-transitions) {
-        transition-property: border-color, background-color, transform;
+        transition-property: border-color, background-color, transform, box-shadow;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms, 70ms, 70ms; 
+        transition-duration: 150ms, 70ms, 70ms, 150ms; 
     }
 </style>

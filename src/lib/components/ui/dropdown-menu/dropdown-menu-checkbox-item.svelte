@@ -16,8 +16,8 @@
     }: DropdownMenuPrimitive.CheckboxItemProps & { variant?: "default" | "basic" } = $props();
 
     const controlVariants = {
-        default: "group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary text-primary-foreground group-data-highlighted:border-foreground/40",
-        basic: "group-data-[state=checked]:border-foreground group-data-[state=checked]:bg-foreground group-data-[state=indeterminate]:border-foreground group-data-[state=indeterminate]:bg-foreground text-background group-data-highlighted:border-foreground/40"
+        default: "group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary text-primary-foreground group-data-highlighted:border-primary/80",
+        basic: "group-data-[state=checked]:border-foreground group-data-[state=checked]:bg-foreground group-data-[state=indeterminate]:border-foreground group-data-[state=indeterminate]:bg-foreground text-background group-data-highlighted:border-foreground/80"
     };
 </script>
 

@@ -1,0 +1,28 @@
+<script lang="ts">
+    import { Label as LabelPrimitive } from "bits-ui";
+    import { cn } from "$lib/utils";
+
+    let {
+        class: className = "",
+        ref = $bindable(null),
+        children,
+        child,
+        ...restProps
+    }: LabelPrimitive.RootProps = $props();
+</script>
+
+<LabelPrimitive.Root
+    bind:ref
+    class={cn(
+        "font-sans text-sm font-medium leading-none",
+        "peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+        "select-none",
+        className
+    )}
+    {child}
+    {...restProps}
+>
+    {#if !child}
+        {@render children?.()}
+    {/if}
+</LabelPrimitive.Root>
