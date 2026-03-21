@@ -2,12 +2,16 @@
 	import { cn } from "$lib/utils";
 	import type { HTMLAttributes } from "svelte/elements";
 
-	let { class: className = "", children, ...restProps }: HTMLAttributes<HTMLSpanElement> = $props();
+	let { class: className = "", children, ...restProps }: HTMLAttributes<HTMLElement> = $props();
 </script>
 
-<span
-	class={cn("ml-auto text-[10px] font-mono tracking-widest text-muted-foreground opacity-60", className)}
+<kbd
+	class={cn(
+		"ml-auto font-sans text-xs tracking-widest text-muted-foreground transition-colors",
+		"group-data-selected:text-current",
+		className
+	)}
 	{...restProps}
 >
 	{@render children?.()}
-</span>
+</kbd>

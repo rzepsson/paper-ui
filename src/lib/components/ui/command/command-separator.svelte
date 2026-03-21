@@ -6,6 +6,6 @@
 </script>
 
 <CommandPrimitive.Separator 
-	class={cn("-mx-1 my-1 h-px bg-border/40", className)} 
+	class={cn("-mx-1 my-1 h-px shrink-0 bg-border/95", className)} 
 	{...restProps} 
 />

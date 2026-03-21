@@ -7,9 +7,10 @@
 
 <CommandPrimitive.Item
 	class={cn(
-		"relative flex cursor-default select-none items-center rounded-md px-2 py-2 text-sm outline-none transition-colors",
-		"data-[selected]:bg-primary/10 data-[selected]:text-primary",
-		"data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+		"group relative flex cursor-default select-none items-center gap-3 rounded-md px-2.5 py-1.5 font-sans text-sm font-medium outline-none",
+		"transition-all duration-200 active:scale-[0.98]",
+		"data-selected:bg-accent data-selected:text-accent-foreground data-selected:outline data-selected:outline-primary data-selected:-outline-offset-2",
+		"data-disabled:pointer-events-none data-disabled:opacity-45",
 		className
 	)}
 	{...restProps}

@@ -15,7 +15,9 @@
 <Sonner
     class="toaster group"
     closeButton={true}
-    richColors={true}
+    richColors={false}
+    expand={false}
+    position="bottom-right"
     toastOptions={{
         unstyled: true,
         classes: {

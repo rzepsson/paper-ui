@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Command as CommandPrimitive } from "bits-ui";
-	import { ScrollArea } from "$lib/components/ui/scroll-area"; // Używamy naszego nowego ScrollArea!
+	import { ScrollArea } from "$lib/components/ui/scroll-area";
 	import { cn } from "$lib/utils";
 
 	let { class: className = "", children, ...restProps }: CommandPrimitive.ListProps = $props();

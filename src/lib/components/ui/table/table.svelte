@@ -145,7 +145,7 @@
                             <td class="px-4 py-4"><Skeleton class="h-4 w-4" /></td>
                         {/if}
                         {#each columns as col}
-                            <td class="px-4 py-4"><Skeleton class="h-4 w-full max-w-30" /></td>
+                            <td class="px-4 py-4"><Skeleton class="h-4 w-full max-w-28" /></td>
                         {/each}
                     </tr>
                 {/each}

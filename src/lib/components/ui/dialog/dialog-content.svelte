@@ -23,7 +23,7 @@
 	
 	<DialogPrimitive.Close
 		class={cn(
-			"absolute right-4 top-4 size-8",
+			"absolute right-1 top-1 size-8",
 			closeButtonClass,
 			focusRingClass
 		)}
