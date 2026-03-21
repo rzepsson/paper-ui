@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { AlertDialog as AlertDialogPrimitive } from "bits-ui";
-	import { fade } from "svelte/transition";
 	import { cn } from "$lib/utils";
 
 	let {
@@ -10,14 +9,30 @@
 	}: AlertDialogPrimitive.OverlayProps = $props();
 </script>
 
-<AlertDialogPrimitive.Overlay forceMount bind:ref {...restProps}>
-	{#snippet child({ props, open })}
-		{#if open}
-			<div
-				{...props}
-				transition:fade={{ duration: 150 }}
-				class={cn("fixed inset-0 z-50 bg-background/80 backdrop-blur-sm", className)}
-			></div>
-		{/if}
-	{/snippet}
-</AlertDialogPrimitive.Overlay>
+<AlertDialogPrimitive.Overlay 
+	bind:ref 
+	class={cn(
+		"alert-dialog-overlay fixed inset-0 z-50 bg-background/80 backdrop-blur-sm", 
+		className
+	)}
+	{...restProps} 
+/>
+
+<style>
+	:global(.alert-dialog-overlay[data-state="open"]) {
+		animation: alert-overlay-in 250ms ease-out both;
+	}
+	:global(.alert-dialog-overlay[data-state="closed"]) {
+		animation: alert-overlay-out 150ms ease-in both;
+	}
+
+	@keyframes alert-overlay-in {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	@keyframes alert-overlay-out {
+		from { opacity: 1; }
+		to { opacity: 0; }
+	}
+</style>

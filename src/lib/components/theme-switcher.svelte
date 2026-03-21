@@ -13,7 +13,7 @@
 	});
 </script>
 
-<div class="flex items-center justify-between rounded-xl border border-border bg-card p-4 shadow-sm">
+<div class="flex items-center justify-between rounded-xl border border-border bg-card p-4">
 	<div class="flex items-center gap-3">
 		<div class="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/50 text-accent-foreground">
 			{#if isDark}

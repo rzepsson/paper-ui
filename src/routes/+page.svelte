@@ -1,425 +1,79 @@
 <script lang="ts">
-  import ThemeSwitcher from "$lib/components/theme-switcher.svelte";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
-  import * as AlertDialog from "$lib/components/ui/alert-dialog";
-  import * as Accordion from "$lib/components/ui/accordion";
-  import * as Checkbox from "$lib/components/ui/checkbox";
+	import * as Command from "$lib/components/ui/command";
   import { Button } from "$lib/components/ui/button";
-  import { Label } from "$lib/components/ui/label";
-  import { Input } from "$lib/components/ui/input";
-  
-  import { 
-    Image as ImageIcon, Frame, MonitorSmartphone, Tablet,
-    Download, Plus, Trash, ExternalLink, ArrowUpDown
-  } from "lucide-svelte";
-  
-  // States for Menu 1 (Checkbox)
-  let showFiles = $state(true);
-  let showFolders = $state(false);
+  import { Badge } from "$lib/components/ui/badge";
+  import { Toaster } from "$lib/components/ui/sonner";
+  import { toast } from "svelte-sonner";
+	import { File, Database, Users, Settings, Plus, Search } from "lucide-svelte";
+	import { onMount } from "svelte";
 
-  // State for Menu 2 (Radio)
-  let sortBy = $state("date");
+	let cmdOpen = $state(false);
 
-  // States for Accordions
-  let activeAccordionItem = $state("item-1");
-  let activeMultipleItems = $state(["item-4"]); 
-
-  // Single Checkbox States
-  let termsAccepted = $state(false);
-  let newsletterIndeterminate = $state(true);
-  
-  // Checkbox Group State
-  let selectedFeatures = $state(["analytics", "reporting"]);
+	onMount(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+				e.preventDefault();
+				cmdOpen = !cmdOpen;
+			}
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	});
 </script>
 
-<div class="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
-  <div class="mx-auto max-w-4xl space-y-16 p-8 py-12 md:p-12">
-    
-    <header class="flex flex-col items-start justify-between gap-6 border-b border-border/50 pb-8 sm:flex-row sm:items-center">
-      <div>
-        <h1 class="text-3xl font-bold tracking-tight">PaperUI Showroom</h1>
-        <p class="text-muted-foreground mt-1 text-sm">Component showcase in React Spectrum / macOS style</p>
-      </div>
-      <div class="w-full sm:w-72">
-        <ThemeSwitcher />
-      </div>
-    </header>
+<Toaster position="bottom-right" expand={false} richColors={false} />
 
-    <section class="space-y-6">
-      <div>
-        <h2 class="text-xl font-semibold tracking-tight">Accordion</h2>
-        <p class="text-sm text-muted-foreground">Collapsible panels with smooth animation and keyboard support.</p>
-      </div>
-      
-      <div class="rounded-xl border border-border/60 bg-card p-6 shadow-sm space-y-8">
+<section class="space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-xl font-semibold tracking-tight">Command Menu</h2>
+        <Badge variant="outline" class="font-mono">⌘K</Badge>
+    </div>
+
+    <Button variant="outline" class="w-full justify-start text-muted-foreground" onclick={() => cmdOpen = true}>
+        <Search class="mr-2 size-4" />
+        Search database, tables, users...
+    </Button>
+
+<Command.Dialog bind:open={cmdOpen}>
+    <Command.Input placeholder="Type a command or search..." />
+    <Command.List>
+        <Command.Empty>No results found.</Command.Empty>
         
-        <div>
-          <h3 class="mb-4 text-sm font-medium text-muted-foreground">Single & Default Variant</h3>
-          <Accordion.Root type="single" bind:value={activeAccordionItem}>
-            
-            <Accordion.Item value="item-1">
-              <Accordion.Header>
-                <Accordion.Trigger>Personal Information</Accordion.Trigger>
-              </Accordion.Header>
-              <Accordion.Content>
-                This is the personal information form. Fill in your name and contact preferences so we can customize the system for you. Notice the text indentation relative to the arrow icon.
-              </Accordion.Content>
-            </Accordion.Item>
-            
-            <Accordion.Item value="item-2">
-              <Accordion.Header>
-                <Accordion.Trigger>Billing Address</Accordion.Trigger>
-              </Accordion.Header>
-              <Accordion.Content>
-                Enter your billing address. Ensure the zip code and city match your bank's records for proper card authorization.
-              </Accordion.Content>
-            </Accordion.Item>
-            
-            <Accordion.Item value="item-3" disabled>
-              <Accordion.Header>
-                <Accordion.Trigger>Danger Zone (Disabled)</Accordion.Trigger>
-              </Accordion.Header>
-              <Accordion.Content>
-                This content won't be shown because the entire section is disabled by the property.
-              </Accordion.Content>
-            </Accordion.Item>
+        <Command.Group>
+            <Command.GroupHeading>Resources</Command.GroupHeading>
+            <Command.GroupItems>
+                <Command.Item onSelect={() => { toast.info("Navigating to Tables"); cmdOpen = false; }}>
+                    <Database class="mr-2 size-4" />
+                    <span>Browse Tables</span>
+                    <Command.Shortcut>⌘T</Command.Shortcut>
+                </Command.Item>
+                <Command.Item onSelect={() => { toast.info("Navigating to Files"); cmdOpen = false; }}>
+                    <File class="mr-2 size-4" />
+                    <span>Storage Buckets</span>
+                </Command.Item>
+                <Command.Item onSelect={() => { toast.info("Navigating to Auth"); cmdOpen = false; }}>
+                    <Users class="mr-2 size-4" />
+                    <span>Manage Users</span>
+                </Command.Item>
+            </Command.GroupItems>
+        </Command.Group>
 
-          </Accordion.Root>
-        </div>
+        <Command.Separator />
 
-        <div>
-          <h3 class="mb-4 text-sm font-medium text-muted-foreground">Multiple & Quiet Variant</h3>
-          <Accordion.Root type="multiple" variant="quiet" bind:value={activeMultipleItems}>
-            
-            <Accordion.Item value="item-4">
-              <Accordion.Header>
-                <Accordion.Trigger>Notification Preferences</Accordion.Trigger>
-              </Accordion.Header>
-              <Accordion.Content>
-                Manage how you receive notifications. You can choose to receive daily digests, instant alerts, or turn off email communications completely.
-              </Accordion.Content>
-            </Accordion.Item>
-            
-            <Accordion.Item value="item-5">
-              <Accordion.Header>
-                <Accordion.Trigger>Privacy Settings</Accordion.Trigger>
-              </Accordion.Header>
-              <Accordion.Content>
-                Control who can see your profile. Your public profile is currently visible to everyone, but your email address remains hidden by default.
-              </Accordion.Content>
-            </Accordion.Item>
-            
-            <Accordion.Item value="item-6" disabled>
-              <Accordion.Header>
-                <Accordion.Trigger>Developer Tools (Disabled)</Accordion.Trigger>
-              </Accordion.Header>
-              <Accordion.Content>
-                Developer tools and experimental features are disabled for this account tier.
-              </Accordion.Content>
-            </Accordion.Item>
-
-          </Accordion.Root>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="space-y-6">
-      <div>
-        <h2 class="text-xl font-semibold tracking-tight">Dropdown Menu</h2>
-        <p class="text-sm text-muted-foreground">Complex context menu supporting submenus, checkboxes, and radio options.</p>
-      </div>
-      
-      <div class="flex flex-wrap gap-6 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
-        
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger class="w-auto px-4">
-            {#snippet child({ props })}
-              <Button {...props} variant="outline">
-                Options
-              </Button>
-            {/snippet}
-          </DropdownMenu.Trigger>
-
-          <DropdownMenu.Content class="w-72">
-            <DropdownMenu.Group>
-              <DropdownMenu.GroupHeading class="pb-3">
-                <DropdownMenu.ItemText>
-                  <DropdownMenu.ItemLabel>Publish and export</DropdownMenu.ItemLabel>
-                  <DropdownMenu.ItemDescription>Social media, other formats</DropdownMenu.ItemDescription>
-                </DropdownMenu.ItemText>
-              </DropdownMenu.GroupHeading>
-
-              <DropdownMenu.Item>
-                <ImageIcon class="size-5 opacity-80" />
-                <DropdownMenu.ItemText>
-                  <DropdownMenu.ItemLabel>Quick Export</DropdownMenu.ItemLabel>
-                  <DropdownMenu.ItemDescription>Share a low-res snapshot.</DropdownMenu.ItemDescription>
-                </DropdownMenu.ItemText>
-                <DropdownMenu.Shortcut>⌘E</DropdownMenu.Shortcut>
-              </DropdownMenu.Item>
-
-              <DropdownMenu.Sub>
-                <DropdownMenu.SubTrigger>
-                  <Frame class="size-5 opacity-80" />
-                  <DropdownMenu.ItemText>
-                    <DropdownMenu.ItemLabel>Open a copy</DropdownMenu.ItemLabel>
-                    <DropdownMenu.ItemDescription>Illustrator for iPad or desktop</DropdownMenu.ItemDescription>
-                  </DropdownMenu.ItemText>
-                </DropdownMenu.SubTrigger>
-                
-                <DropdownMenu.SubContent class="w-60">
-                  <DropdownMenu.GroupHeading>Open a copy in</DropdownMenu.GroupHeading>
-                  <DropdownMenu.Item>
-                    <Tablet class="size-5 opacity-80" />
-                    <span>Illustrator for iPad</span>
-                  </DropdownMenu.Item>
-                  <DropdownMenu.Item disabled={true}>
-                    <MonitorSmartphone class="size-5 opacity-80" />
-                    <span>Illustrator for desktop</span>
-                  </DropdownMenu.Item>
-                </DropdownMenu.SubContent>
-              </DropdownMenu.Sub>
-
-              <DropdownMenu.Separator class="my-2" />
-
-              <DropdownMenu.CheckboxItem bind:checked={showFiles}>
-                Show files
-              </DropdownMenu.CheckboxItem>
-              <DropdownMenu.CheckboxItem bind:checked={showFolders}>
-                Show folders
-              </DropdownMenu.CheckboxItem>
-            </DropdownMenu.Group>
-          </DropdownMenu.Content>
-        </DropdownMenu.Root>
-
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger class="w-auto px-4">
-            {#snippet child({ props })}
-              <Button {...props} variant="outline">
-                Sort by
-              </Button>
-            {/snippet}
-          </DropdownMenu.Trigger>
-
-          <DropdownMenu.Content class="w-48">
-            <DropdownMenu.Group>
-              <DropdownMenu.GroupHeading class="pb-3">
-                <DropdownMenu.ItemText>
-                  <DropdownMenu.ItemLabel>Sort by</DropdownMenu.ItemLabel>
-                  <DropdownMenu.ItemDescription>Choose sorting method</DropdownMenu.ItemDescription>
-                </DropdownMenu.ItemText>
-              </DropdownMenu.GroupHeading>
-              
-              <DropdownMenu.Separator class="mb-2" />
-              
-              <DropdownMenu.RadioGroup bind:value={sortBy}>
-                <DropdownMenu.RadioItem value="date" disabled={true} closeOnSelect={false}>
-                  Date
-                </DropdownMenu.RadioItem>
-                <DropdownMenu.RadioItem value="name" closeOnSelect={false}>
-                  Name
-                </DropdownMenu.RadioItem>
-                <DropdownMenu.RadioItem value="size" closeOnSelect={false}>
-                  Size
-                </DropdownMenu.RadioItem>
-              </DropdownMenu.RadioGroup>
-            </DropdownMenu.Group>
-          </DropdownMenu.Content>
-        </DropdownMenu.Root>
-        
-      </div>
-    </section>
-
-    <section class="space-y-6">
-      <div>
-        <h2 class="text-xl font-semibold tracking-tight">Alert Dialog</h2>
-        <p class="text-sm text-muted-foreground">Krytyczne okno modalne przerywające pracę użytkownika.</p>
-      </div>
-      
-      <div class="flex flex-wrap gap-6 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
-        
-        <AlertDialog.Root>
-          <AlertDialog.Trigger>
-            {#snippet child({ props })}
-              <Button {...props}>
-                Alert
-              </Button>
-            {/snippet}
-          </AlertDialog.Trigger>
-          
-          <AlertDialog.Portal>
-            <AlertDialog.Overlay />
-            <AlertDialog.Content>
-              <div class="flex flex-col gap-2">
-                <AlertDialog.Title>Czy na pewno chcesz usunąć projekt?</AlertDialog.Title>
-                <AlertDialog.Description>
-                  Ta akcja jest nieodwracalna. Spowoduje to trwałe usunięcie projektu oraz wszystkich przypisanych do niego plików z naszych serwerów.
-                </AlertDialog.Description>
-              </div>
-              
-              <div class="mt-6 flex flex-col-reverse justify-end gap-3 sm:flex-row">
-                <AlertDialog.Cancel>
-                  {#snippet child({ props })}
-                    <Button {...props} variant="outline" class="w-full sm:w-auto">
-                      Anuluj
-                    </Button>
-                  {/snippet}
-                </AlertDialog.Cancel>
-                <AlertDialog.Action>
-                  {#snippet child({ props })}
-                    <Button {...props} variant="destructive" class="w-full sm:w-auto">
-                      Tak, usuń
-                    </Button>
-                  {/snippet}
-                </AlertDialog.Action>
-              </div>
-            </AlertDialog.Content>
-          </AlertDialog.Portal>
-        </AlertDialog.Root>
-
-      </div>
-    </section>
-
-    <section class="space-y-6">
-      <div>
-        <h2 class="text-xl font-semibold tracking-tight">Buttons</h2>
-        <p class="text-sm text-muted-foreground">Primary interactive element in various variants and sizes.</p>
-      </div>
-      
-      <div class="flex flex-col gap-8 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
-        
-        <div class="space-y-3">
-          <h3 class="text-sm font-medium text-muted-foreground">Variants</h3>
-          <div class="flex flex-wrap items-center gap-4">
-            <Button variant="default">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="destructive">Destructive</Button>
-            <Button variant="link">Link text</Button>
-          </div>
-        </div>
-
-        <div class="space-y-3">
-          <h3 class="text-sm font-medium text-muted-foreground">Sizes & Icons</h3>
-          <div class="flex flex-wrap items-center gap-4">
-            <Button size="sm">Small (32px)</Button>
-            <Button size="default">Default (36px)</Button>
-            <Button size="lg">Large (40px)</Button>
-            
-            <Button>
-              <Download class="mr-2 size-4" />
-              Save
-            </Button>
-
-            <Button variant="outline" size="icon" aria-label="Add">
-              <Plus class="size-4" />
-            </Button>
-          </div>
-        </div>
-
-        <div class="space-y-3">
-          <h3 class="text-sm font-medium text-muted-foreground">Special States (Disabled & Links)</h3>
-          <div class="flex flex-wrap items-center gap-4">
-            <Button disabled>
-              <Trash class="mr-2 size-4" />
-              Disabled
-            </Button>
-
-            <Button href="https://github.com" target="_blank" variant="secondary">
-              <ExternalLink class="mr-2 size-4" />
-              Open link
-            </Button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="space-y-6">
-      <div>
-        <h2 class="text-xl font-semibold tracking-tight">Forms & Typography</h2>
-        <p class="text-sm text-muted-foreground">Labels, inputs and state management.</p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
-        
-        <div class="space-y-3">
-          <h3 class="text-sm font-medium text-muted-foreground">Standard Field</h3>
-          <div class="flex max-w-sm flex-col-reverse gap-2">
-            <Input 
-              id="mock-email" 
-              type="email" 
-              placeholder="name@example.com" 
-            />
-            <Label for="mock-email">Email address</Label>
-          </div>
-        </div>
-
-        <div class="space-y-3">
-          <h3 class="text-sm font-medium text-muted-foreground">Disabled Field Magic</h3>
-          <div class="flex max-w-sm flex-col-reverse gap-2">
-            <Input 
-              id="mock-username" 
-              type="text" 
-              disabled 
-              placeholder="This field is disabled" 
-            />
-            <Label for="mock-username">Username (disabled)</Label>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="space-y-6">
-      <div>
-        <h2 class="text-xl font-semibold tracking-tight">Checkboxes</h2>
-        <p class="text-sm text-muted-foreground">Versatile selection controls with tri-state support and grouping.</p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
-        
-        <div class="space-y-6">
-          <h3 class="text-sm font-medium text-muted-foreground">Individual States</h3>
-          <div class="space-y-4">
-            <Checkbox.Root bind:checked={termsAccepted} variant="basic">
-              Accept terms and conditions
-            </Checkbox.Root>
-            
-            <Checkbox.Root bind:indeterminate={newsletterIndeterminate} variant="basic">
-              Enable daily digests
-            </Checkbox.Root>
-
-            <Checkbox.Root disabled checked variant="basic">
-              Disabled checked state
-            </Checkbox.Root>
-          </div>
-        </div>
-
-        <div class="space-y-6">
-          <h3 class="text-sm font-medium text-muted-foreground">Checkbox Group</h3>
-          <Checkbox.Group bind:value={selectedFeatures} class="space-y-4">
-            <Checkbox.GroupLabel class="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-              Platform Features
-            </Checkbox.GroupLabel>
-            
-            <div class="space-y-3 pt-1">
-              <Checkbox.Root value="analytics">Real-time Analytics</Checkbox.Root>
-              <Checkbox.Root value="reporting">Advanced Reporting</Checkbox.Root>
-              <Checkbox.Root value="api">API Access</Checkbox.Root>
-              <Checkbox.Root value="sso" disabled>SSO Integration (Enterprise)</Checkbox.Root>
-            </div>
-          </Checkbox.Group>
-          
-          <p class="text-[10px] font-mono text-muted-foreground bg-muted p-2 rounded">
-            Selected: {JSON.stringify(selectedFeatures)}
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-  </div>
-</div>
+        <Command.Group>
+            <Command.GroupHeading>Actions</Command.GroupHeading>
+            <Command.GroupItems>
+                <Command.Item>
+                    <Plus class="mr-2 size-4" />
+                    <span>Create New Table</span>
+                </Command.Item>
+                <Command.Item>
+                    <Settings class="mr-2 size-4" />
+                    <span>Project Settings</span>
+                    <Command.Shortcut>⌘S</Command.Shortcut>
+                </Command.Item>
+            </Command.GroupItems>
+        </Command.Group>
+    </Command.List>
+</Command.Dialog>
+</section>

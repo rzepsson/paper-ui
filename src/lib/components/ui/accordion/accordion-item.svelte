@@ -19,7 +19,7 @@
 	bind:ref
 	{value}
 	class={cn(
-		variant === "default" && "border-b border-border/60",
+		variant === "default" && "border-b border-border",
 		className
 	)}
 	{...restProps}

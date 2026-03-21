@@ -23,7 +23,7 @@
 	bind:ref 
 	class={cn(
 		"w-full", 
-		variant === "default" && "border-t border-border/60",
+		variant === "default" && "border-t border-border",
 		className
 	)} 
 	{...restProps as any}

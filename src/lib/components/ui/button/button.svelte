@@ -22,8 +22,8 @@
 	const variantClasses: Record<ButtonVariant, string> = {
 		default: "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
 		destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-		outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-		secondary: "bg-secondary text-secondary-foreground border border-border/50 shadow-sm hover:bg-secondary/80",
+		outline: "border border-input bg-background hover:bg-background/10",
+		secondary: "bg-secondary text-secondary-foreground border border-border/50 hover:bg-foreground/10",
 		ghost: "hover:bg-accent hover:text-accent-foreground",
 		link: "text-primary hover:text-primary/80",
 	};
