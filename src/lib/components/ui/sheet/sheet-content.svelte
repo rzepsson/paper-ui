@@ -40,7 +40,7 @@
 				)}
 			>
 				<X class="size-4" />
-				<span class="sr-only">Zamknij</span>
+				<span class="sr-only">Close</span>
 			</SheetPrimitive.Close>
 		</div>
 	</SheetPrimitive.Content>

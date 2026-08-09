@@ -29,7 +29,7 @@
 		)}
 	>
 		<X class="size-4" />
-		<span class="sr-only">Zamknij okno</span>
+		<span class="sr-only">Close dialog</span>
 	</DialogPrimitive.Close>
 </DialogPrimitive.Content>
 

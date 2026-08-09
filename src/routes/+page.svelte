@@ -122,18 +122,17 @@
   let isTableLoading = $state(false);
   let currentSort = $state<any>(null);
 
-  // Funkcja symulująca pobieranie danych (Loading state test)
+  // Fakes a fetch so the loading state can be seen
   async function simulateLoading() {
     isTableLoading = true;
     await new Promise(resolve => setTimeout(resolve, 2000));
     isTableLoading = false;
   }
 
-  // Twoje definicje kolumn i wierszy
   const columns = [
-    { key: "name", label: "Nazwa pliku", sortable: true }, // Dodano sortable
-    { key: "type", label: "Typ", sortable: true },
-    { key: "size", label: "Rozmiar", class: "text-right", sortable: true },
+    { key: "name", label: "File name", sortable: true },
+    { key: "type", label: "Type", sortable: true },
+    { key: "size", label: "Size", class: "text-right", sortable: true },
     { key: "status", label: "Status" },
   ];
 
@@ -147,10 +146,10 @@
   };
 
   const rows: FileRow[] = [
-    { id: "1", name: "raport_Q3.pdf", type: "PDF", size: "2.4 MB", status: "Gotowy" },
-    { id: "2", name: "logo_wektor.svg", type: "Obraz", size: "124 KB", status: "Oczekujący" },
-    { id: "3", name: "budzet_2026.xlsx", type: "Arkusz", size: "4.1 MB", status: "Błąd" },
-    { id: "4", name: "notatki_ze_spotkania.txt", type: "Tekst", size: "12 KB", status: "Gotowy" },
+    { id: "1", name: "report_Q3.pdf", type: "PDF", size: "2.4 MB", status: "Ready" },
+    { id: "2", name: "logo_vector.svg", type: "Image", size: "124 KB", status: "Pending" },
+    { id: "3", name: "budget_2026.xlsx", type: "Sheet", size: "4.1 MB", status: "Failed" },
+    { id: "4", name: "meeting_notes.txt", type: "Text", size: "12 KB", status: "Ready" },
   ];
 
   let selectedFiles = $state<string[]>(["2"]);
@@ -174,33 +173,33 @@
     <section class="space-y-6">
       <div>
         <h2 class="text-xl font-semibold tracking-tight">Tabs</h2>
-        <p class="text-sm text-muted-foreground">Organizuj dane w widoki (Spectrum Style).</p>
+        <p class="text-sm text-muted-foreground">Organize data into views (Spectrum style).</p>
       </div>
 
       <div class="rounded-xl border border-border/60 bg-card p-6 shadow-sm">
         <Tabs.Root value="all" class="w-full">
           <Tabs.List>
             <Tabs.Trigger value="all">
-              Wszystkie 
+              All
               <Badge variant="secondary" class="ml-2 h-4 px-1 text-[10px]">128</Badge>
             </Tabs.Trigger>
-            <Tabs.Trigger value="active">Aktywne</Tabs.Trigger>
-            <Tabs.Trigger value="archived">Zarchiwizowane</Tabs.Trigger>
-            <Tabs.Trigger value="settings" disabled>Ustawienia</Tabs.Trigger>
+            <Tabs.Trigger value="active">Active</Tabs.Trigger>
+            <Tabs.Trigger value="archived">Archived</Tabs.Trigger>
+            <Tabs.Trigger value="settings" disabled>Settings</Tabs.Trigger>
           </Tabs.List>
 
           <Tabs.Content value="all">
             <div class="rounded-lg border border-dashed border-border/60 p-8 text-center">
-              <p class="text-sm text-muted-foreground font-sans">Tutaj znajdzie się Twoja główna tabela BaaS.</p>
+              <p class="text-sm text-muted-foreground font-sans">Your main table would go here.</p>
             </div>
           </Tabs.Content>
 
           <Tabs.Content value="active">
-            <div class="p-4 text-sm font-sans">Widok przefiltrowany: tylko aktywne rekordy.</div>
+            <div class="p-4 text-sm font-sans">Filtered view: active records only.</div>
           </Tabs.Content>
 
           <Tabs.Content value="archived">
-            <div class="p-4 text-sm font-sans text-muted-foreground">Archiwum jest puste.</div>
+            <div class="p-4 text-sm font-sans text-muted-foreground">The archive is empty.</div>
           </Tabs.Content>
         </Tabs.Root>
       </div>
@@ -410,7 +409,7 @@
     <section class="space-y-6">
       <div>
         <h2 class="text-xl font-semibold tracking-tight">Alert Dialog</h2>
-        <p class="text-sm text-muted-foreground">Krytyczne okno modalne przerywające pracę użytkownika.</p>
+        <p class="text-sm text-muted-foreground">A blocking modal for decisions that can't be undone.</p>
       </div>
       
       <div class="flex flex-wrap gap-6 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
@@ -428,9 +427,9 @@
             <AlertDialog.Overlay />
             <AlertDialog.Content>
               <div class="flex flex-col gap-2">
-                <AlertDialog.Title>Czy na pewno chcesz usunąć projekt?</AlertDialog.Title>
+                <AlertDialog.Title>Delete this project?</AlertDialog.Title>
                 <AlertDialog.Description>
-                  Ta akcja jest nieodwracalna. Spowoduje to trwałe usunięcie projektu oraz wszystkich przypisanych do niego plików z naszych serwerów.
+                  This can't be undone. The project and every file attached to it will be permanently removed from our servers.
                 </AlertDialog.Description>
               </div>
               
@@ -438,14 +437,14 @@
                 <AlertDialog.Cancel>
                   {#snippet child({ props })}
                     <Button {...props} variant="outline" class="w-full sm:w-auto">
-                      Anuluj
+                      Cancel
                     </Button>
                   {/snippet}
                 </AlertDialog.Cancel>
                 <AlertDialog.Action>
                   {#snippet child({ props })}
                     <Button {...props} variant="destructive" class="w-full sm:w-auto">
-                      Tak, usuń
+                      Yes, delete
                     </Button>
                   {/snippet}
                 </AlertDialog.Action>
@@ -458,7 +457,7 @@
           <Dialog.Trigger>
             {#snippet child({ props })}
               <Button {...props} variant="secondary">
-                Zwykły Dialog
+                Plain Dialog
               </Button>
             {/snippet}
           </Dialog.Trigger>
@@ -466,20 +465,20 @@
           <Dialog.Portal>
             <Dialog.Overlay />
             <Dialog.Content>
-              <Dialog.Title>Ustawienia konta</Dialog.Title>
+              <Dialog.Title>Account settings</Dialog.Title>
               <Dialog.Description>
-                Dokonaj zmian w swoim profilu tutaj. Kliknij przycisk Zapisz, gdy skończysz.
+                Make changes to your profile here. Click Save when you're done.
               </Dialog.Description>
-              
+
               <div class="py-4 flex flex-col-reverse gap-2">
-                <Input id="name" placeholder="Jan Kowalski" />
-                <Label for="name">Imię i nazwisko</Label>
+                <Input id="name" placeholder="Jane Doe" />
+                <Label for="name">Full name</Label>
               </div>
 
               <div class="mt-4 flex justify-end">
                 <Dialog.Close>
                   {#snippet child({ props })}
-                    <Button {...props}>Zapisz zmiany</Button>
+                    <Button {...props}>Save changes</Button>
                   {/snippet}
                 </Dialog.Close>
               </div>
@@ -495,10 +494,10 @@
         <div class="flex items-end justify-between">
           <div>
             <h2 class="text-xl font-semibold tracking-tight">Table & Sheet Integration</h2>
-            <p class="text-sm text-muted-foreground">Kliknij wiersz lub ikonę, aby edytować rekord w panelu bocznym.</p>
+            <p class="text-sm text-muted-foreground">Click a row or the icon to edit the record in the side panel.</p>
           </div>
           <Button variant="outline" size="sm" onclick={simulateLoading} disabled={isTableLoading}>
-            {isTableLoading ? "Ładowanie..." : "Odśwież dane"}
+            {isTableLoading ? "Loading..." : "Refresh data"}
           </Button>
         </div>
 
@@ -511,14 +510,14 @@
           bind:sortConfig={currentSort}
           isLoading={isTableLoading}
           maxHeight="400px"
-          onsort={(config) => toast.info(`Sortowanie: ${config?.key}`)}
+          onsort={(config) => toast.info(`Sorting by: ${config?.key}`)}
         >
           {#snippet cell(row, col)}
             {#if col.key === "status"}
               <Badge 
                 variant={
-                  row[col.key] === 'Gotowy' ? 'success' : 
-                  row[col.key] === 'Oczekujący' ? 'warning' : 'destructive'
+                  row[col.key] === 'Ready' ? 'success' :
+                  row[col.key] === 'Pending' ? 'warning' : 'destructive'
                 }
               >
                 {row[col.key]}
@@ -552,9 +551,9 @@
         <Sheet.Root bind:open={isSheetOpen}>
           <Sheet.Content side="right">
             <Sheet.Header>
-              <Sheet.Title>Szczegóły pliku</Sheet.Title>
+              <Sheet.Title>File details</Sheet.Title>
               <Sheet.Description>
-                Edytuj metadane i uprawnienia dla wybranego zasobu.
+                Edit metadata and permissions for the selected resource.
               </Sheet.Description>
             </Sheet.Header>
 
@@ -562,26 +561,26 @@
               <div class="grid gap-6 py-8">
                 <div class="space-y-4 rounded-lg bg-muted/30 p-4 border border-border/40">
                   <div class="flex justify-between text-sm">
-                    <span class="text-muted-foreground">ID Zasobu:</span>
+                    <span class="text-muted-foreground">Resource ID:</span>
                     <span class="font-mono text-[11px]">{selectedFileDetails.id}</span>
                   </div>
                   <div class="flex justify-between text-sm">
-                    <span class="text-muted-foreground">Ostatnia modyfikacja:</span>
-                    <span class="font-medium">Dzisiaj, 14:20</span>
+                    <span class="text-muted-foreground">Last modified:</span>
+                    <span class="font-medium">Today, 14:20</span>
                   </div>
                 </div>
 
                 <div class="grid gap-2">
-                  <Label for="file-name">Nazwa wyświetlana</Label>
+                  <Label for="file-name">Display name</Label>
                   <Input id="file-name" bind:value={selectedFileDetails.name} />
                 </div>
 
                 <div class="grid gap-2">
-                  <Label>Tagi systemu</Label>
+                  <Label>System tags</Label>
                   <div class="flex flex-wrap gap-2">
                     <Badge variant="outline">#internal</Badge>
                     <Badge variant="outline">#q3-report</Badge>
-                    <Button variant="ghost" size="sm" class="h-6 px-2 text-[10px]">+ Dodaj</Button>
+                    <Button variant="ghost" size="sm" class="h-6 px-2 text-[10px]">+ Add</Button>
                   </div>
                 </div>
               </div>
@@ -596,7 +595,7 @@
             <Sheet.Footer>
               <Sheet.Close>
                 {#snippet child({ props })}
-                  <Button {...props} class="w-full sm:w-auto">Zapisz zmiany</Button>
+                  <Button {...props} class="w-full sm:w-auto">Save changes</Button>
                 {/snippet}
               </Sheet.Close>
             </Sheet.Footer>
@@ -609,7 +608,7 @@
       <div class="flex flex-col gap-4">
         <div class="flex items-center justify-between px-2">
           <p class="text-xs text-muted-foreground">
-            Pokazano <span class="font-medium text-foreground">1-10</span> z <span class="font-medium text-foreground">{totalItems}</span> wyników
+            Showing <span class="font-medium text-foreground">1-10</span> of <span class="font-medium text-foreground">{totalItems}</span> results
           </p>
           
           <Pagination 
@@ -624,7 +623,7 @@
     <section class="space-y-6">
       <div>
         <h2 class="text-xl font-semibold tracking-tight">Tooltips</h2>
-        <p class="text-sm text-muted-foreground">Krótkie podpowiedzi pojawiające się po najechaniu.</p>
+        <p class="text-sm text-muted-foreground">Short hints that appear on hover.</p>
       </div>
 
       <div class="flex flex-wrap gap-4 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
@@ -638,7 +637,7 @@
             {/snippet}
           </Tooltip.Trigger>
           <Tooltip.Content>
-            Dodaj nowy projekt
+            Add a new project
           </Tooltip.Content>
         </Tooltip.Root>
 
@@ -651,7 +650,7 @@
             {/snippet}
           </Tooltip.Trigger>
           <Tooltip.Content side="right" sideOffset={8}>
-            Usuń trwale
+            Delete permanently
           </Tooltip.Content>
         </Tooltip.Root>
 
@@ -661,7 +660,7 @@
     <section class="space-y-6">
       <div>
         <h2 class="text-xl font-semibold tracking-tight">Popover</h2>
-        <p class="text-sm text-muted-foreground">Pływające panele na bogatą treść i formularze.</p>
+        <p class="text-sm text-muted-foreground">Floating panels for richer content and small forms.</p>
       </div>
 
       <div class="flex flex-wrap gap-6 rounded-xl border border-border/60 bg-card p-6 shadow-sm">
@@ -671,7 +670,7 @@
             {#snippet child({ props })}
               <Button {...props} variant="outline" class="gap-2">
                 <Settings2 class="size-4" />
-                Wymiary obszaru
+                Canvas size
               </Button>
             {/snippet}
           </Popover.Trigger>
@@ -679,17 +678,17 @@
           <Popover.Content class="w-80">
             <div class="grid gap-4">
               <div class="space-y-1.5">
-                <h4 class="font-medium leading-none">Geometria</h4>
-                <p class="text-[13px] text-muted-foreground">Zdefiniuj domyślne wymiary renderowania.</p>
+                <h4 class="font-medium leading-none">Geometry</h4>
+                <p class="text-[13px] text-muted-foreground">Set the default render dimensions.</p>
               </div>
               
               <div class="grid gap-3">
                 <div class="flex items-center gap-4">
-                  <Label for="pop-width" class="w-20 text-[13px]">Szerokość</Label>
+                  <Label for="pop-width" class="w-20 text-[13px]">Width</Label>
                   <Input id="pop-width" bind:value={areaWidth} class="h-8 text-[13px]" />
                 </div>
                 <div class="flex items-center gap-4">
-                  <Label for="pop-height" class="w-20 text-[13px]">Wysokość</Label>
+                  <Label for="pop-height" class="w-20 text-[13px]">Height</Label>
                   <Input id="pop-height" bind:value={areaHeight} class="h-8 text-[13px]" />
                 </div>
               </div>
@@ -697,7 +696,7 @@
               <div class="mt-2 flex justify-end">
                 <Popover.Close>
                   {#snippet child({ props })}
-                    <Button {...props} size="sm" class="h-8 px-4">Zastosuj</Button>
+                    <Button {...props} size="sm" class="h-8 px-4">Apply</Button>
                   {/snippet}
                 </Popover.Close>
               </div>
@@ -862,7 +861,7 @@
 
         <Select.Root type="single" bind:value={selectedFramework}>
           <Select.Trigger class="w-64">
-            {selectedFramework ? selectedFramework : "Wybierz framework..."}
+            {selectedFramework ? selectedFramework : "Pick a framework..."}
           </Select.Trigger>
           <Select.Content>
             <Select.Group>
@@ -882,12 +881,12 @@
 
         <Select.Root type="multiple" bind:value={selectedFeatures}>
           <Select.Trigger class="w-64">
-            {selectedFeatures.length > 0 ? `${selectedFeatures.length} wybrano` : "Moduły..."}
+            {selectedFeatures.length > 0 ? `${selectedFeatures.length} selected` : "Modules..."}
           </Select.Trigger>
           <Select.Content>
-            <Select.Item value="auth" label="Autoryzacja" type="checkbox" />
-            <Select.Item value="db" label="Baza danych" type="checkbox" />
-            <Select.Item value="storage" label="Magazyn S3" type="checkbox" />
+            <Select.Item value="auth" label="Authentication" type="checkbox" />
+            <Select.Item value="db" label="Database" type="checkbox" />
+            <Select.Item value="storage" label="S3 storage" type="checkbox" />
           </Select.Content>
         </Select.Root>
 
@@ -897,48 +896,48 @@
     <section class="space-y-6">
       <div>
         <h2 class="text-xl font-semibold tracking-tight">Command (Spotlight)</h2>
-        <p class="text-sm text-muted-foreground">Szybka nawigacja, wyszukiwanie i akcje z pełną obsługą klawiatury (styl macOS).</p>
+        <p class="text-sm text-muted-foreground">Fast navigation, search and actions, fully keyboard driven (macOS style).</p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         <div class="rounded-xl border border-border/60 bg-card p-1 shadow-sm flex flex-col overflow-hidden h-100">
           <Command.Root>
-            <Command.Input placeholder="Wpisz polecenie lub szukaj..." />
+            <Command.Input placeholder="Type a command or search..." />
             <Command.List>
-              <Command.Empty>Brak wyników wyszukiwania.</Command.Empty>
-              
-              <Command.Group heading="Sugestie">
+              <Command.Empty>No results found.</Command.Empty>
+
+              <Command.Group heading="Suggestions">
                 <Command.Item>
                   <Calendar class="mr-2 size-4 opacity-70" />
-                  Kalendarz
+                  Calendar
                 </Command.Item>
                 <Command.Item>
                   <Smile class="mr-2 size-4 opacity-70" />
-                  Szukaj Emoji
+                  Search Emoji
                 </Command.Item>
                 <Command.Item disabled>
                   <Calculator class="mr-2 size-4 opacity-70" />
-                  Kalkulator (Niedostępne)
+                  Calculator (unavailable)
                 </Command.Item>
               </Command.Group>
-              
+
               <Command.Separator />
-              
-              <Command.Group heading="Ustawienia">
+
+              <Command.Group heading="Settings">
                 <Command.Item>
                   <User class="mr-2 size-4 opacity-70" />
-                  Profil konta
+                  Account profile
                   <Command.Shortcut>⌘P</Command.Shortcut>
                 </Command.Item>
                 <Command.Item>
                   <CreditCard class="mr-2 size-4 opacity-70" />
-                  Płatności i subskrypcje
+                  Billing and subscriptions
                   <Command.Shortcut>⌘B</Command.Shortcut>
                 </Command.Item>
                 <Command.Item>
                   <Settings2 class="mr-2 size-4 opacity-70" />
-                  Preferencje systemu
+                  System preferences
                   <Command.Shortcut>⌘S</Command.Shortcut>
                 </Command.Item>
               </Command.Group>
@@ -951,12 +950,12 @@
             <div class="mx-auto flex size-12 items-center justify-center rounded-full bg-primary/10 mb-4">
               <Search class="size-6 text-primary" />
             </div>
-            <h3 class="font-medium">Wersja Modalna (Dialog)</h3>
-            <p class="text-sm text-muted-foreground">Idealna do centralnego wyszukiwania w aplikacji.</p>
+            <h3 class="font-medium">Modal version (Dialog)</h3>
+            <p class="text-sm text-muted-foreground">The one you reach for as an app-wide search.</p>
           </div>
-          
+
           <Button variant="outline" onclick={() => commandDialogOpen = true}>
-            Otwórz Command
+            Open Command
             <kbd class="ml-2 pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-sans text-[10px] font-medium text-muted-foreground opacity-100">
               <span class="text-xs">⌘</span>J
             </kbd>
@@ -1017,32 +1016,32 @@
   </div>
 
   <Command.Dialog bind:open={commandDialogOpen}>
-    <Command.Input placeholder="Szukaj w PaperUI..." />
+    <Command.Input placeholder="Search PaperUI..." />
     <Command.List>
-        <Command.Empty>Nie znaleziono takiego polecenia.</Command.Empty>
-        
-        <Command.Group heading="Zarządzanie">
-        <Command.Item onSelect={() => { commandDialogOpen = false; toast.success("Otwieram: Projekty") }}>
+        <Command.Empty>No such command.</Command.Empty>
+
+        <Command.Group heading="Manage">
+        <Command.Item onSelect={() => { commandDialogOpen = false; toast.success("Opening: Projects") }}>
             <Frame class="mr-2 size-4 opacity-70" />
-            Moje projekty
+            My projects
         </Command.Item>
-        <Command.Item onSelect={() => { commandDialogOpen = false; toast.success("Otwieram: Zespół") }}>
+        <Command.Item onSelect={() => { commandDialogOpen = false; toast.success("Opening: Team") }}>
             <User class="mr-2 size-4 opacity-70" />
-            Zespół i uprawnienia
+            Team and permissions
         </Command.Item>
         </Command.Group>
 
         <Command.Separator />
-        
-        <Command.Group heading="Szybkie Akcje">
+
+        <Command.Group heading="Quick actions">
         <Command.Item onSelect={() => { commandDialogOpen = false; showDefaultToast() }}>
             <Download class="mr-2 size-4 opacity-70" />
-            Eksportuj dane
+            Export data
             <Command.Shortcut>⌘E</Command.Shortcut>
         </Command.Item>
         <Command.Item class="text-destructive data-selected:bg-destructive/10 data-selected:text-destructive" onSelect={() => { commandDialogOpen = false; showErrorToast() }}>
             <Trash class="mr-2 size-4 opacity-70" />
-            Wyczyść cache
+            Clear cache
             <Command.Shortcut>⇧⌘⌫</Command.Shortcut>
         </Command.Item>
         </Command.Group>

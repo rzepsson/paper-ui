@@ -152,7 +152,7 @@
             {:else if rows.length === 0}
                 <tr>
                     <td colspan={columns.length + (selectionMode !== "none" ? 1 : 0)} class="p-12 text-center text-muted-foreground font-sans">
-                        Brak danych do wyświetlenia.
+                        No data to display.
                     </td>
                 </tr>
             {:else}

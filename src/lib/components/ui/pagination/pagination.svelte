@@ -33,7 +33,7 @@
 						class="h-7 w-7 p-0 text-muted-foreground hover:bg-background/50 hover:text-foreground transition-all duration-200"
 					>
 						<ChevronLeft class="size-3.5" />
-						<span class="sr-only">Poprzednia</span>
+						<span class="sr-only">Previous page</span>
 					</Button>
 				{/snippet}
 			</PaginationPrimitive.PrevButton>
@@ -73,7 +73,7 @@
 						class="h-7 w-7 p-0 text-muted-foreground hover:bg-background/50 hover:text-foreground transition-all duration-200"
 					>
 						<ChevronRight class="size-3.5" />
-						<span class="sr-only">Następna</span>
+						<span class="sr-only">Next page</span>
 					</Button>
 				{/snippet}
 			</PaginationPrimitive.NextButton>

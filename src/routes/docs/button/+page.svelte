@@ -23,25 +23,26 @@
 
   // Generate dynamic code based on selections
   function generateCode() {
-    let code = `<Button`;
-    
+    const props = [];
+
     if (selectedVariant !== "default") {
-      code += `\n  variant="${selectedVariant}"`;
+      props.push(`variant="${selectedVariant}"`);
     }
     if (selectedSize !== "default") {
-      code += `\n  size="${selectedSize}"`;
+      props.push(`size="${selectedSize}"`);
     }
     if (isDisabled) {
-      code += `\n  disabled`;
+      props.push("disabled");
     }
     if (isHref) {
-      code += `\n  href="https://paper-ui.com"`;
+      props.push(`href="https://paper-ui.com"`);
     }
-    
-    code += `\n>`;
-    code += `\n  ${selectedSize === "icon" ? "+" : "Click me"}\n</Button>`;
-    
-    return code;
+
+    // Keep the tag on one line while it has nothing to hold
+    const openTag = props.length ? `<Button\n  ${props.join("\n  ")}\n>` : "<Button>";
+    const label = selectedSize === "icon" ? "+" : "Click me";
+
+    return `${openTag}\n  ${label}\n</Button>`;
   }
 
   function copyCode() {

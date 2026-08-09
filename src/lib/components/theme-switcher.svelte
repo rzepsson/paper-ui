@@ -1,16 +1,9 @@
 <script lang="ts">
 	import { Switch } from "$lib/components/ui/switch";
+	import { mode, toggleMode } from "mode-watcher";
 	import { Moon, Sun } from "lucide-svelte";
 
-	let isDark = $state(false);
-
-	$effect(() => {
-		if (isDark) {
-			document.documentElement.classList.add("dark");
-		} else {
-			document.documentElement.classList.remove("dark");
-		}
-	});
+	const isDark = $derived(mode.current === "dark");
 </script>
 
 <div class="flex items-center justify-between rounded-xl border border-border bg-card p-4">
@@ -27,6 +20,6 @@
 			<span class="text-xs text-muted-foreground">Switch to {isDark ? 'light' : 'dark'} mode</span>
 		</div>
 	</div>
-	
-	<Switch bind:checked={isDark} />
+
+	<Switch checked={isDark} onCheckedChange={toggleMode} aria-label="Toggle dark mode" />
 </div>
