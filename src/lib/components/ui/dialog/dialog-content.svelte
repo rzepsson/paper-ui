@@ -14,7 +14,7 @@
 <DialogPrimitive.Content 
 	bind:ref 
 	class={cn(
-		"dialog-content fixed left-[50%] top-[50%] z-50 grid w-[calc(100%-2rem)] max-w-lg gap-6 rounded-xl border border-border/60 bg-card p-6 shadow-sm outline-none sm:rounded-2xl",
+		"dialog-content fixed left-[50%] top-[50%] z-50 grid w-[calc(100%-2rem)] max-w-lg gap-6 rounded-2xl border border-border/60 bg-card p-6 shadow-sm outline-none",
 		className
 	)}
 	{...restProps}
@@ -23,7 +23,7 @@
 	
 	<DialogPrimitive.Close
 		class={cn(
-			"absolute right-1 top-1 size-8",
+			"absolute right-3 top-3 size-8",
 			closeButtonClass,
 			focusRingClass
 		)}

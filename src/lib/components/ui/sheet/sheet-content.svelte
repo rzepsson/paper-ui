@@ -21,7 +21,7 @@
 		{...restProps}
 		data-side={side}
 		class={cn(
-			"sheet-content fixed z-50 flex flex-col bg-card shadow-sm border-border/60 outline-none",
+			"sheet-content fixed z-50 flex flex-col bg-card p-6 shadow-sm border-border/60 outline-none",
 			side === "right" && "inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-md",
 			side === "left" && "inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-md",
 			side === "top" && "inset-x-0 top-0 w-full border-b h-auto",
@@ -29,20 +29,14 @@
 			className
 		)}
 	>
-		<div class="flex flex-col h-full relative p-6">
-			{@render children?.()}
-			
-			<SheetPrimitive.Close
-				class={cn(
-					"absolute right-4 top-4 size-8 opacity-70 transition-opacity hover:opacity-100",
-					closeButtonClass,
-					focusRingClass
-				)}
-			>
-				<X class="size-4" />
-				<span class="sr-only">Close</span>
-			</SheetPrimitive.Close>
-		</div>
+		{@render children?.()}
+
+		<SheetPrimitive.Close
+			class={cn("absolute right-4 top-4 size-8", closeButtonClass, focusRingClass)}
+		>
+			<X class="size-4" />
+			<span class="sr-only">Close</span>
+		</SheetPrimitive.Close>
 	</SheetPrimitive.Content>
 </Portal>
 

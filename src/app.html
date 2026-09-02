@@ -3,6 +3,33 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script>
+			// Paint the saved accent and radius before first render, so a customised
+			// theme never flashes the defaults on the way in.
+			try {
+				const saved = JSON.parse(localStorage.getItem('paperui:theme') || '{}');
+				const presets = {
+					blue: ['oklch(0.6231 0.1880 259.8145)', 'oklch(1 0 0)'],
+					violet: ['oklch(0.5854 0.2041 292.72)', 'oklch(1 0 0)'],
+					teal: ['oklch(0.6 0.118 184.7)', 'oklch(1 0 0)'],
+					emerald: ['oklch(0.596 0.145 163.2)', 'oklch(1 0 0)'],
+					amber: ['oklch(0.7686 0.1647 70.08)', 'oklch(0.2 0 0)'],
+					rose: ['oklch(0.6368 0.2078 15)', 'oklch(1 0 0)'],
+					graphite: ['oklch(0.4 0 0)', 'oklch(1 0 0)']
+				};
+				const radii = { '0': '0rem', sm: '0.25rem', md: '0.5rem', lg: '0.75rem' };
+				const root = document.documentElement;
+				const preset = presets[saved.preset];
+				if (preset) {
+					root.style.setProperty('--primary', preset[0]);
+					root.style.setProperty('--primary-foreground', preset[1]);
+					root.style.setProperty('--ring', preset[0]);
+					root.style.setProperty('--sidebar-primary', preset[0]);
+					root.style.setProperty('--sidebar-ring', preset[0]);
+				}
+				if (radii[saved.radius]) root.style.setProperty('--radius', radii[saved.radius]);
+			} catch {}
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

@@ -21,10 +21,10 @@
 		{align}
 		{sideOffset}
 		class={cn(
-			"tooltip-surface z-50 rounded-sm px-2.5 py-1.5",
-			"bg-neutral-950 text-neutral-50 dark:bg-neutral-50 dark:text-neutral-950",
-			"text-[11px] font-medium border border-white/10 dark:border-black/10",
-			"select-none outline-none backdrop-blur-md", 
+			"tooltip-surface z-50 max-w-xs rounded-md px-2.5 py-1.5 shadow-md",
+			"bg-foreground text-background",
+			"text-[11px] font-medium leading-snug",
+			"select-none outline-none",
 			className
 		)}
 		{...restProps}

@@ -48,7 +48,7 @@
             <span
                 aria-hidden="true"
                 class={cn(
-                    "checkbox-transitions relative flex shrink-0 items-center justify-center rounded border-2 border-input bg-background outline-none",
+                    "checkbox-transitions relative flex size-[18px] shrink-0 items-center justify-center rounded-xs border-2 border-input bg-background outline-none",
                     checkboxVariants[variant]
                 )}
             >

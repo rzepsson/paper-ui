@@ -13,7 +13,7 @@
 <AlertDialogPrimitive.Content 
 	bind:ref 
 	class={cn(
-		"alert-dialog-content fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg gap-6 rounded-xl border border-border/60 bg-card p-6 shadow-sm outline-none sm:rounded-2xl",
+		"alert-dialog-content fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg gap-6 rounded-2xl border border-border/60 bg-card p-6 shadow-sm outline-none",
 		className
 	)}
 	{...restProps}

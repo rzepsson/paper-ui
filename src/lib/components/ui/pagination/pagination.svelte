@@ -23,7 +23,7 @@
 	{...restProps}
 >
 	{#snippet children({ pages })}
-		<div class="flex flex-row items-center gap-0.5 rounded-sm bg-muted/50 p-0.5 font-sans select-none border-2 border-border/40">
+		<div class="flex flex-row items-center gap-0.5 rounded-full border border-border/60 bg-muted/50 p-1 font-sans select-none">
 			
 			<PaginationPrimitive.PrevButton>
 				{#snippet child({ props })}
@@ -38,7 +38,7 @@
 				{/snippet}
 			</PaginationPrimitive.PrevButton>
 
-			<div class="flex items-center gap-0.5">
+			<div class="flex items-center gap-1">
 				{#each pages as p (p.key)}
 					{#if p.type === "page"}
 						<PaginationPrimitive.Page page={p}>
@@ -47,9 +47,9 @@
 									{...props}
 									variant="ghost"
 									class={cn(
-										"m-1 h-7 min-w-7 px-1 text-[12px] transition-all duration-200 ease-out",
-										page === p.value 
-											? "rounded-sm bg-foreground/10 text-foreground font-semibold ring-1 ring-black/5 dark:ring-white/10" 
+										"h-7 min-w-7 px-2 text-[12px] transition-all duration-200 ease-out",
+										page === p.value
+											? "bg-background text-foreground font-semibold shadow-sm ring-1 ring-border/60"
 											: "text-muted-foreground/80 hover:bg-background/50 hover:text-foreground font-medium"
 									)}
 								>

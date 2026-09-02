@@ -21,7 +21,7 @@
 		{align}
 		{sideOffset}
 		class={cn(
-			"select-surface z-50 overflow-hidden rounded-lg border border-border/80 bg-popover p-1 text-popover-foreground shadow-sm outline-none",
+			"select-surface z-50 overflow-hidden rounded-xl border border-border/80 bg-popover p-1 text-popover-foreground shadow-sm outline-none",
 			"min-w-56",
 			"max-h-[calc(var(--bits-select-content-available-height)-12px)]",
 			"data-[state=closed]:pointer-events-none",
@@ -33,7 +33,7 @@
 			<ChevronUp class="size-3" />
 		</SelectPrimitive.ScrollUpButton>
 		
-		<SelectPrimitive.Viewport class="p-2">
+		<SelectPrimitive.Viewport class="p-0">
 			{@render children?.()}
 		</SelectPrimitive.Viewport>
 		

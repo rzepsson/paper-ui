@@ -21,8 +21,8 @@
 		{align}
 		{sideOffset}
 		class={cn(
-			"popover-surface z-50 overflow-hidden rounded-xl border border-border/60 bg-popover p-4 text-popover-foreground shadow-sm outline-none",
-			"min-w-72 backdrop-blur-xl bg-card/95", 
+			"popover-surface z-50 overflow-hidden rounded-xl border border-border/60 bg-popover/95 p-4 text-popover-foreground shadow-lg outline-none",
+			"min-w-72 backdrop-blur-xl",
 			className
 		)}
 		{...restProps}

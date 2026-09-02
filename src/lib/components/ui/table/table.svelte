@@ -17,7 +17,7 @@
     import { Checkbox } from "$lib/components/ui/checkbox";
     import { ChevronUp } from "lucide-svelte";
     import { Skeleton } from "$lib/components/ui/skeleton";
-    import { ScrollArea } from "$lib/components/ui/scroll-area"; // Importujemy ScrollArea
+    import { ScrollArea } from "$lib/components/ui/scroll-area";
 
     let {
         class: className = "",
@@ -48,7 +48,6 @@
         onsort?: (config: SortConfig) => void;
     } = $props();
 
-    // ... logika toggleAll, toggleRow, handleSort bez zmian ...
     let isAllSelected = $derived(rows.length > 0 && selectedKeys.length === rows.length);
     let isIndeterminate = $derived(selectedKeys.length > 0 && selectedKeys.length < rows.length);
 
@@ -84,7 +83,7 @@
     orientation="both"
     class={cn(
         "w-full",
-        variant === "default" && "rounded-sm border border-border/60 bg-card shadow-sm",
+        variant === "default" && "rounded-xl border border-border/60 bg-card shadow-sm",
         variant === "quiet" && "bg-transparent",
         className
     )}
@@ -97,7 +96,7 @@
                 variant === "default" ? "bg-muted/90 backdrop-blur-md" : "bg-background/90 backdrop-blur-md"
             )}>
                 {#if selectionMode !== "none"}
-                    <th class="w-12 px-4 py-3 align-middle">
+                    <th scope="col" class="w-12 px-4 py-3 align-middle">
                         {#if selectionMode === "multiple"}
                             <Checkbox 
                                 checked={isAllSelected}
@@ -107,11 +106,18 @@
                         {/if}
                     </th>
                 {/if}
-                {#each columns as col}
-                    <th class={cn("px-4 py-3 align-middle font-medium text-muted-foreground", col.class)}>
+                {#each columns as col (col.key)}
+                    <th
+                        scope="col"
+                        aria-sort={sortConfig?.key === col.key
+                            ? (sortConfig.direction === "asc" ? "ascending" : "descending")
+                            : (col.sortable ? "none" : undefined)}
+                        class={cn("px-4 py-3 align-middle font-medium text-muted-foreground", col.class)}
+                    >
                         {#if col.sortable}
-                            <button 
-                                class="group/sort flex items-center gap-1.5 hover:text-foreground transition-colors outline-none"
+                            <button
+                                class="group/sort flex items-center gap-1.5 rounded-sm hover:text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                aria-label={`Sort by ${col.label}`}
                                 onclick={() => handleSort(col.key)}
                             >
                                 {col.label}
@@ -139,12 +145,12 @@
 
         <tbody class="relative">
             {#if isLoading}
-                {#each Array(5) as _}
+                {#each { length: 5 }, i (i)}
                     <tr class="border-b border-border/20">
                         {#if selectionMode !== "none"}
                             <td class="px-4 py-4"><Skeleton class="h-4 w-4" /></td>
                         {/if}
-                        {#each columns as col}
+                        {#each columns as col (col.key)}
                             <td class="px-4 py-4"><Skeleton class="h-4 w-full max-w-28" /></td>
                         {/each}
                     </tr>
@@ -161,12 +167,21 @@
                     <tr
                         class={cn(
                             "border-b border-border/40 transition-colors duration-150 font-sans",
-                            selectionMode !== "none" && "cursor-pointer",
+                            selectionMode !== "none" && "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:-outline-offset-2",
                             !isSelected && "hover:bg-muted/40",
                             isSelected && "bg-primary/5 hover:bg-primary/10",
                             variant === "quiet" && "border-b-border/30"
                         )}
+                        aria-selected={selectionMode === "none" ? undefined : isSelected}
+                        tabindex={selectionMode === "none" ? undefined : 0}
                         onclick={() => toggleRow(row.id)}
+                        onkeydown={(e) => {
+                            if (selectionMode === "none") return;
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                toggleRow(row.id);
+                            }
+                        }}
                     >
                         {#if selectionMode !== "none"}
                             <td class="w-12 px-4 py-3 align-middle" onclick={(e) => e.stopPropagation()}>
@@ -174,7 +189,7 @@
                             </td>
                         {/if}
 
-                        {#each columns as col}
+                        {#each columns as col (col.key)}
                             <td class={cn("px-4 py-3 align-middle text-foreground/90", col.class)} onclick={(e) => col.key === 'actions' && e.stopPropagation()}>
                                 {#if cell}{@render cell(row, col)}{:else}{row[col.key]}{/if}
                             </td>

@@ -23,7 +23,7 @@
 <SelectPrimitive.Trigger
     bind:ref
     class={cn(
-        "flex h-9 w-full items-center justify-between rounded-sm border-2 border-input bg-background px-3 py-1 text-sm transition-all duration-200 outline-none select-none",
+        "flex h-9 w-full items-center justify-between rounded-lg border-2 border-input bg-background px-3 py-1 text-sm transition-all duration-200 outline-none select-none",
         variantClasses[variant],
         "data-placeholder:text-muted-foreground",
         "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-input",

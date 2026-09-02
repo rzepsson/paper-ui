@@ -31,7 +31,7 @@
         bind:indeterminate
         bind:ref
         class={cn(
-            "checkbox-transitions group relative flex shrink-0 items-center justify-center rounded border-2 border-input bg-background outline-none",
+            "checkbox-transitions group relative flex size-[18px] shrink-0 items-center justify-center rounded-xs border-2 border-input bg-background outline-none",
             "active:scale-[0.92]",
             focusRingClass,
             variantClasses[variant],

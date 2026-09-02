@@ -23,7 +23,7 @@
     bind:this={ref}
     bind:value
     class={cn(
-        "peer flex h-9 w-full rounded-sm border-2 border-input bg-background px-3 py-1 text-sm transition-all duration-200",
+        "peer flex h-9 w-full rounded-lg border-2 border-input bg-background px-3 py-1 text-sm transition-all duration-200",
         variantClasses[variant],
         "file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground",
         "placeholder:text-muted-foreground",

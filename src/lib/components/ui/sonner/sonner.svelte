@@ -41,7 +41,7 @@
             ),
 
             actionButton: cn(
-                "ml-auto inline-flex items-center justify-center whitespace-nowrap font-sans font-medium transition-all active:scale-[0.92] duration-200 select-none shadow-sm h-8 rounded-lg px-3 text-xs",
+                "ml-auto inline-flex items-center justify-center whitespace-nowrap font-sans font-medium transition-all active:scale-[0.92] duration-200 select-none shadow-sm h-8 rounded-full px-3 text-xs",
                 "group-data-[type=default]:bg-primary group-data-[type=default]:text-primary-foreground group-data-[type=default]:hover:bg-primary/90",
                 "group-data-[type=success]:bg-white/20 group-data-[type=success]:text-white group-data-[type=success]:hover:bg-white/30",
                 "group-data-[type=error]:bg-white/20 group-data-[type=error]:text-white group-data-[type=error]:hover:bg-white/30",
@@ -49,7 +49,7 @@
                 "group-data-[type=warning]:bg-white/20 group-data-[type=warning]:text-white group-data-[type=warning]:hover:bg-white/30"
             ),
             cancelButton: cn(
-                "inline-flex items-center justify-center whitespace-nowrap font-sans font-medium transition-all active:scale-[0.92] duration-200 select-none shadow-sm h-8 rounded-lg px-3 text-xs",
+                "inline-flex items-center justify-center whitespace-nowrap font-sans font-medium transition-all active:scale-[0.92] duration-200 select-none shadow-sm h-8 rounded-full px-3 text-xs",
                 "group-data-[type=default]:bg-muted group-data-[type=default]:text-muted-foreground group-data-[type=default]:hover:bg-muted/80",
                 "group-data-[type=success]:bg-black/10 group-data-[type=success]:text-white group-data-[type=success]:hover:bg-black/20",
                 "group-data-[type=error]:bg-black/10 group-data-[type=error]:text-white group-data-[type=error]:hover:bg-black/20",

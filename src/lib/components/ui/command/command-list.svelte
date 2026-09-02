@@ -6,7 +6,7 @@
 	let { class: className = "", children, ...restProps }: CommandPrimitive.ListProps = $props();
 </script>
 
-<CommandPrimitive.List class={cn("max-h-87.5 overflow-hidden", className)} {...restProps}>
+<CommandPrimitive.List class={cn("max-h-[350px] overflow-hidden", className)} {...restProps}>
 	<ScrollArea orientation="vertical" class="h-full">
 		<CommandPrimitive.Viewport class="p-2">
 			{@render children?.()}

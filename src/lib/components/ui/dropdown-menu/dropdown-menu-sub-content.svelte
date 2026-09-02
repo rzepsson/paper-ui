@@ -29,7 +29,7 @@
 		bind:ref
 		{sideOffset}
 		class={cn(
-			"dropdown-menu-surface z-50 overflow-hidden rounded-lg border border-border/80 bg-popover p-2 text-popover-foreground shadow-sm outline-none",
+			"dropdown-menu-surface z-50 overflow-hidden rounded-xl border border-border/80 bg-popover p-2 text-popover-foreground shadow-sm outline-none",
 			sizeClassMap[size as MenuSize] ?? sizeClassMap.m,
 			"max-h-[calc(var(--bits-dropdown-menu-content-available-height)-12px)]",
 			"data-[state=closed]:pointer-events-none",
