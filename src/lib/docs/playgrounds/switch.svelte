@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { Switch } from "$lib/components/ui/switch";
 
-	let { checked = false, disabled = false }: { checked?: boolean; disabled?: boolean } = $props();
+	let {
+		variant = "default",
+		checked = false,
+		disabled = false
+	}: { variant?: any; checked?: boolean; disabled?: boolean } = $props();
 </script>
 
-<Switch {checked} {disabled} aria-label="Playground switch" />
+<Switch {variant} {checked} {disabled} aria-label="Playground switch" />

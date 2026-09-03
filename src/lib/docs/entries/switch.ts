@@ -11,17 +11,30 @@ const entry: DocEntry = {
 	primitive: "Switch",
 	examples: [
 		{ id: "default", title: "With a label", description: "Give it an `id` so the label can point at it." },
+		{
+			id: "variants",
+			title: "Variants",
+			description: "`spring` throws the thumb with an overshooting curve and squashes it while pressed."
+		},
 		{ id: "settings-row", title: "Settings list", description: "The shape it usually appears in." },
 		{ id: "disabled", title: "Disabled", description: "" }
 	],
 	playground: {
 		component: Playground,
 		controls: [
+			{
+				kind: "select",
+				prop: "variant",
+				label: "Variant",
+				options: ["default", "spring"],
+				default: "default"
+			},
 			{ kind: "boolean", prop: "checked", label: "Checked", default: false },
 			{ kind: "boolean", prop: "disabled", label: "Disabled", default: false }
 		],
-		code: ({ checked, disabled }) => {
+		code: ({ variant, checked, disabled }) => {
 			const props = ["bind:checked"];
+			if (variant !== "default") props.push(`variant="${variant}"`);
 			if (disabled) props.push("disabled");
 			return `<Switch ${props.join(" ")} />` + (checked ? "\n<!-- checked starts as true -->" : "");
 		}
@@ -30,6 +43,12 @@ const entry: DocEntry = {
 		{
 			title: "Switch",
 			rows: [
+				{
+					name: "variant",
+					type: '"default" | "spring"',
+					default: '"default"',
+					description: "`spring` gives the thumb an overshooting travel curve."
+				},
 				{
 					name: "checked",
 					type: "boolean",

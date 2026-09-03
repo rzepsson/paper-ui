@@ -13,7 +13,8 @@ const entry: DocEntry = {
 		{
 			id: "variants",
 			title: "Variants",
-			description: "`default` accents the focused border with the primary colour; `basic` keeps it neutral."
+			description:
+				"`default` is the boxed field. `underline` drops the box and sweeps a rule out from the centre on focus."
 		},
 		{ id: "types", title: "Input types", description: "Anything the platform supports." },
 		{ id: "disabled", title: "Disabled", description: "" }
@@ -21,7 +22,13 @@ const entry: DocEntry = {
 	playground: {
 		component: Playground,
 		controls: [
-			{ kind: "select", prop: "variant", label: "Variant", options: ["default", "basic"], default: "default" },
+			{
+				kind: "select",
+				prop: "variant",
+				label: "Variant",
+				options: ["default", "underline"],
+				default: "default"
+			},
 			{ kind: "boolean", prop: "disabled", label: "Disabled", default: false },
 			{ kind: "text", prop: "placeholder", label: "Placeholder", default: "Type something" }
 		],
@@ -40,9 +47,9 @@ const entry: DocEntry = {
 			rows: [
 				{
 					name: "variant",
-					type: '"default" | "basic"',
+					type: '"default" | "underline"',
 					default: '"default"',
-					description: "Which colour the border takes on focus."
+					description: "`underline` swaps the box for a single rule that animates in on focus."
 				},
 				{
 					name: "value",

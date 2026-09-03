@@ -8,24 +8,12 @@
         value,
         label,
         type = "default",
-        variant = "default",
         ref = $bindable(null),
         children: childrenProp,
         ...restProps
-    }: SelectPrimitive.ItemProps & { 
-        type?: "default" | "checkbox",
-        variant?: "default" | "basic" 
+    }: SelectPrimitive.ItemProps & {
+        type?: "default" | "checkbox";
     } = $props();
-
-    const checkboxVariants = {
-        default: "group-data-selected:border-primary group-data-selected:bg-primary text-primary-foreground group-data-highlighted:border-foreground/30",
-        basic: "group-data-selected:border-foreground group-data-selected:bg-foreground text-background group-data-highlighted:border-foreground/30"
-    };
-
-    const checkVariants = {
-        default: "text-primary",
-        basic: "text-foreground"
-    };
 </script>
 
 <SelectPrimitive.Item
@@ -48,20 +36,17 @@
             <span
                 aria-hidden="true"
                 class={cn(
-                    "checkbox-transitions relative flex size-[18px] shrink-0 items-center justify-center rounded-xs border-2 border-input bg-background outline-none",
-                    checkboxVariants[variant]
+                    "checkbox-transitions relative flex size-4.5 shrink-0 items-center justify-center rounded-xs border-2 border-input bg-background outline-none",
+                    "group-data-selected:border-primary group-data-selected:bg-primary text-primary-foreground group-data-highlighted:border-foreground/30"
                 )}
             >
                 <Check class="size-3.5 opacity-0 transition-opacity duration-50 group-data-selected:opacity-100" strokeWidth={3} />
             </span>
         {:else}
             <span class="absolute left-2.5 flex size-4 items-center justify-center">
-                <Check 
-                    class={cn(
-                        "size-4 opacity-0 transition-opacity group-data-selected:opacity-100",
-                        checkVariants[variant]
-                    )} 
-                    strokeWidth={3} 
+                <Check
+                    class="size-4 text-primary opacity-0 transition-opacity group-data-selected:opacity-100"
+                    strokeWidth={3}
                 />
             </span>
         {/if}

@@ -8,16 +8,10 @@
         value,
         ref = $bindable(null),
         closeOnSelect = true,
-        variant = "default",
         children: childrenProp,
         child,
         ...restProps
-    }: DropdownMenuPrimitive.RadioItemProps & { variant?: "default" | "basic" } = $props();
-
-    const checkVariants = {
-        default: "text-primary",
-        basic: "text-foreground"
-    };
+    }: DropdownMenuPrimitive.RadioItemProps = $props();
 </script>
 
 <DropdownMenuPrimitive.RadioItem
@@ -35,12 +29,9 @@
     {#snippet children({ checked })}
         {#if !child}
             <span class="absolute left-2.5 flex size-4 items-center justify-center">
-                <Check 
-                    class={cn(
-                        "size-4 opacity-0 transition-opacity group-data-[state=checked]:opacity-100",
-                        checkVariants[variant]
-                    )} 
-                    strokeWidth={3} 
+                <Check
+                    class="size-4 text-primary opacity-0 transition-opacity group-data-[state=checked]:opacity-100"
+                    strokeWidth={3}
                 />
             </span>
             

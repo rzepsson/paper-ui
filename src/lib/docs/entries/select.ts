@@ -24,6 +24,11 @@ const entry: DocEntry = {
 </Select.Root>`,
 	examples: [
 		{ id: "default", title: "Single", description: "`type=\"single\"` binds `value` to a string." },
+		{
+			id: "variants",
+			title: "Trigger variants",
+			description: "The same two shapes Input offers, so a mixed form does not look assembled from parts."
+		},
 		{ id: "groups", title: "Groups", description: "Headings and separators structure a longer list." },
 		{
 			id: "multiple",
@@ -62,9 +67,9 @@ const entry: DocEntry = {
 			rows: [
 				{
 					name: "variant",
-					type: '"default" | "basic"',
+					type: '"default" | "underline"',
 					default: '"default"',
-					description: "Which colour the border takes on focus and while open."
+					description: "Matches the Input variants, so a mixed form stays consistent."
 				},
 				{
 					name: "child",

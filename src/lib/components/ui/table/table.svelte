@@ -39,7 +39,7 @@
         rows: T[];
         selectionMode?: "none" | "single" | "multiple";
         variant?: "default" | "quiet";
-        checkboxVariant?: "default" | "basic";
+        checkboxVariant?: "default" | "draw";
         selectedKeys?: (string | number)[];
         sortConfig?: SortConfig;
         isLoading?: boolean;

@@ -12,7 +12,11 @@ const entry: DocEntry = {
 	examples: [
 		{ id: "default", title: "With a label", description: "Children become the label; the `id` is generated for you." },
 		{ id: "states", title: "States", description: "Indeterminate draws a dash instead of a tick." },
-		{ id: "variants", title: "Variants", description: "" },
+		{
+			id: "variants",
+			title: "Variants",
+			description: "Both land in the same state; only the way they get there differs."
+		},
 		{
 			id: "group",
 			title: "Group",
@@ -22,7 +26,13 @@ const entry: DocEntry = {
 	playground: {
 		component: Playground,
 		controls: [
-			{ kind: "select", prop: "variant", label: "Variant", options: ["default", "basic"], default: "default" },
+			{
+				kind: "select",
+				prop: "variant",
+				label: "Variant",
+				options: ["default", "draw"],
+				default: "default"
+			},
 			{ kind: "boolean", prop: "checked", label: "Checked", default: false },
 			{ kind: "boolean", prop: "indeterminate", label: "Indeterminate", default: false },
 			{ kind: "boolean", prop: "disabled", label: "Disabled", default: false },
@@ -58,9 +68,9 @@ const entry: DocEntry = {
 				},
 				{
 					name: "variant",
-					type: '"default" | "basic"',
+					type: '"default" | "draw"',
 					default: '"default"',
-					description: "Which colour the filled box takes."
+					description: "`draw` strokes the tick on instead of fading it, and pops the box."
 				},
 				{
 					name: "value",

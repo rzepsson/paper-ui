@@ -69,7 +69,7 @@ const entry: DocEntry = {
 				},
 				{
 					name: "checkboxVariant",
-					type: '"default" | "basic"',
+					type: '"default" | "draw"',
 					default: '"default"',
 					description: "Passed through to the selection checkboxes."
 				},

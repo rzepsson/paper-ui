@@ -9,16 +9,10 @@
         child,
         checked = $bindable(false),
         indeterminate = $bindable(false),
-        variant = "default",
         closeOnSelect = false,
         ref = $bindable(null),
         ...restProps
-    }: DropdownMenuPrimitive.CheckboxItemProps & { variant?: "default" | "basic" } = $props();
-
-    const controlVariants = {
-        default: "group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary text-primary-foreground group-data-highlighted:border-foreground/30",
-        basic: "group-data-[state=checked]:border-foreground group-data-[state=checked]:bg-foreground group-data-[state=indeterminate]:border-foreground group-data-[state=indeterminate]:bg-foreground text-background group-data-highlighted:border-foreground/30"
-    };
+    }: DropdownMenuPrimitive.CheckboxItemProps = $props();
 </script>
 
 <DropdownMenuPrimitive.CheckboxItem
@@ -40,8 +34,8 @@
         <span
             aria-hidden="true"
             class={cn(
-                "checkbox-transitions relative flex size-[18px] shrink-0 items-center justify-center rounded-xs border-2 border-input bg-background outline-none",
-                controlVariants[variant]
+                "checkbox-transitions relative flex size-4.5 shrink-0 items-center justify-center rounded-xs border-2 border-input bg-background outline-none",
+                "group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary text-primary-foreground group-data-highlighted:border-foreground/30"
             )}
         >
             <Check class="size-3.5 opacity-0 transition-opacity duration-50 group-data-[state=checked]:opacity-100" strokeWidth={3} />
